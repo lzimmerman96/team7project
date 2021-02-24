@@ -30,12 +30,40 @@ class Artist(models.Model):
         return f'{self.user}'
 
 
+# Tags can be added to Artwork.
+class Tag(models.Model):
+    # tag_id is not needed as a field on this file.  It can be referenced by other models.
+    tag_name = models.CharField(max_length=50)
+    tag_description = models.TextField(max_length=280)
+
+    def __str__(self):
+        return f'{self.tag_name}'
+
+
 # This is the Model representing a piece of Artwork (not specifically a submission of a piece)
 class Artwork(models.Model):
     # artwork_id this is not needed as a field on this file.  It can be referenced by other models.
     artwork_title = models.CharField(max_length=200)
     artwork_description = models.TextField(max_length=280)
+    # One piece of Artwork can have multiple Artists
     artwork_artist = models.ManyToManyField(Artist)
+    # One piece of Artwork can have multiple Tags
+    artwork_tag = models.ManyToManyField(Tag)
 
     def __str__(self):
         return f'{self.artwork_title}'
+
+
+# Each Collection has many pieces of Artwork inside it.  A Collection is
+# created by one User.
+class Collection(models.Model):
+    # collection_id is not needed as a field on this file.  It can be referenced by other models.
+    collection_name = models.CharField(max_length=200)
+    collection_description = models.TextField(max_length=280)
+    # this collection will cease to exist when an Artist deletes their account.
+    collection_artist = models.ForeignKey('Artist', on_delete=models.CASCADE)
+    # this collection will have many pieces of Artwork inside it.
+    artwork = models.ManyToManyField(Artwork)
+
+    def __str__(self):
+        return f'{self.collection_name}'

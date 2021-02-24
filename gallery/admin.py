@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from .models import Artist, Artwork
+from .models import Artist, Artwork, Collection, Tag
 
 
 # Register your models here.
@@ -22,10 +22,23 @@ class UserAdmin(BaseUserAdmin):
     inlines = (ArtistInline,)
 
 
-# Registrations
+# This is for adding multiple artists to one
+# Artwork submission.
+class ArtworkAdmin(admin.ModelAdmin):
+    model = Artwork
+    filter_horizontal = ('artwork_artist', 'artwork_tag')
+
+
+# This is for adding multiple pieces of Artwork
+# to the Collection.
+class CollectionAdmin(admin.ModelAdmin):
+    model = Collection
+    filter_horizontal = ('artwork',)
+
 
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
-
-admin.site.register(Artwork)
+admin.site.register(Artwork, ArtworkAdmin)
+admin.site.register(Collection, CollectionAdmin)
+admin.site.register(Tag)
