@@ -25,3 +25,17 @@ class Artist(models.Model):
     # "the Python Imaging Library adds image processing capabilities to your Python interpreter"
     #  - https://pypi.org/project/Pillow/
     # profile_picture = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return f'{self.user}'
+
+
+# This is the Model representing a piece of Artwork (not specifically a submission of a piece)
+class Artwork(models.Model):
+    # artwork_id this is not needed as a field on this file.  It can be referenced by other models.
+    artwork_title = models.CharField(max_length=200)
+    artwork_description = models.TextField(max_length=280)
+    artwork_artist = models.ManyToManyField(Artist)
+
+    def __str__(self):
+        return f'{self.artwork_title}'
