@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 # Create your models here.
@@ -67,3 +68,27 @@ class Collection(models.Model):
 
     def __str__(self):
         return f'{self.collection_name}'
+
+
+# Many-to-Many relationship may not work; definitions have to
+# be in a certain order.
+# Each Favorites folder has one Artist and many pieces of Artwork.
+class Favorite(models.Model):
+    favorite_artist = models.ForeignKey('Artist', on_delete=models.CASCADE)
+    favorite_artwork = models.ManyToManyField(Artwork)
+
+    # for now, just the user's username is displayed.
+    def __str__(self):
+        return f'{self.favorite_artist.user}'
+
+# Each Artist can rate a piece of Artwork
+# For Django, creating a model is a valid way to do things.
+# We can edit this as we go.
+# https://stackoverflow.com/questions/45842245/implement-a-multi-part-5-star-rating-system-in-django-1-11
+class Rating(models.Model):
+    rating_level = models.IntegerField(default=1, validators=(MaxValueValidator(5), MinValueValidator(1)))
+    rating_artist = models.ForeignKey('Artist', on_delete=models.CASCADE)
+    rating_artwork = models.ForeignKey('Artwork', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.rating_artwork.artwork_title, self.rating_level, self.rating_artist.user}'

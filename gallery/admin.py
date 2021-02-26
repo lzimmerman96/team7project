@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from .models import Artist, Artwork, Collection, Tag
+from .models import Artist, Artwork, Collection, Tag, Rating, Favorite
 
 
 # Register your models here.
@@ -36,9 +36,15 @@ class CollectionAdmin(admin.ModelAdmin):
     filter_horizontal = ('artwork',)
 
 
+# This is for adding multiple ratings to pieces
+# of Artwork.
+
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+# Register other models
 admin.site.register(Artwork, ArtworkAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Tag)
+admin.site.register(Rating)
+admin.site.register(Favorite)
