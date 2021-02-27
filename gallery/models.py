@@ -17,7 +17,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#extending-the-existing-user-model
 class Artist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    artist_role = models.BooleanField(null=True, blank=True)
+    artist_role = models.BooleanField(null=True)
     description = models.TextField(max_length=280, null=True, blank=True)  # this is the default for all descriptions
 
     # https://www.geeksforgeeks.org/python-uploading-images-in-django/
@@ -48,9 +48,12 @@ class Artwork(models.Model):
     artwork_title = models.CharField(max_length=200)
     artwork_description = models.TextField(max_length=280, null=True, blank=True)
     # One piece of Artwork can have multiple Artists
+    # Do to this, deletion of an artist does not delete the Artwork.
+    # All information about the Artwork including Favorites, what Collection, and Ratings are preserved.
+    # However, Artists can reclaim work.
     artwork_artist = models.ManyToManyField(Artist)
     # One piece of Artwork can have multiple Tags
-    artwork_tag = models.ManyToManyField(Tag)
+    artwork_tag = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return f'{self.artwork_title}'
@@ -65,7 +68,7 @@ class Collection(models.Model):
     # this collection will cease to exist when an Artist deletes their account.
     collection_artist = models.ForeignKey('Artist', on_delete=models.CASCADE)
     # this collection will have many pieces of Artwork inside it.
-    artwork = models.ManyToManyField(Artwork)
+    artwork = models.ManyToManyField(Artwork, blank=True)
 
     def __str__(self):
         return f'{self.collection_name}'
@@ -76,7 +79,8 @@ class Collection(models.Model):
 # Each Favorites folder has one Artist and many pieces of Artwork.
 class Favorite(models.Model):
     favorite_artist = models.ForeignKey('Artist', on_delete=models.CASCADE)
-    favorite_artwork = models.ManyToManyField(Artwork)
+    # A Favorite folder can have no submissions in it so far.
+    favorite_artwork = models.ManyToManyField(Artwork, blank=True)
 
     # for now, just the user's username is displayed.
     def __str__(self):
