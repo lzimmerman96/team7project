@@ -26,7 +26,7 @@ class Artist(models.Model):
     # download it at https://pypi.org/project/Pillow/
     # "the Python Imaging Library adds image processing capabilities to your Python interpreter"
     #  - https://pypi.org/project/Pillow/
-    # profile_picture = models.ImageField(upload_to='images/')
+    profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return f'{self.user}'
@@ -54,6 +54,7 @@ class Artwork(models.Model):
     artwork_artist = models.ManyToManyField(Artist)
     # One piece of Artwork can have multiple Tags
     artwork_tag = models.ManyToManyField(Tag, blank=True)
+    artwork_picture = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return f'{self.artwork_title}'
