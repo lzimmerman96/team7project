@@ -17,7 +17,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#extending-the-existing-user-model
 class Artist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.TextField(max_length=280)  # this is the default for all descriptions
+    artist_role = models.BooleanField(null=True, blank=True)
+    description = models.TextField(max_length=280, null=True, blank=True)  # this is the default for all descriptions
 
     # https://www.geeksforgeeks.org/python-uploading-images-in-django/
 
@@ -35,7 +36,7 @@ class Artist(models.Model):
 class Tag(models.Model):
     # tag_id is not needed as a field on this file.  It can be referenced by other models.
     tag_name = models.CharField(max_length=50)
-    tag_description = models.TextField(max_length=280)
+    tag_description = models.TextField(max_length=280, null=True, blank=True)
 
     def __str__(self):
         return f'{self.tag_name}'
@@ -45,7 +46,7 @@ class Tag(models.Model):
 class Artwork(models.Model):
     # artwork_id this is not needed as a field on this file.  It can be referenced by other models.
     artwork_title = models.CharField(max_length=200)
-    artwork_description = models.TextField(max_length=280)
+    artwork_description = models.TextField(max_length=280, null=True, blank=True)
     # One piece of Artwork can have multiple Artists
     artwork_artist = models.ManyToManyField(Artist)
     # One piece of Artwork can have multiple Tags
@@ -60,7 +61,7 @@ class Artwork(models.Model):
 class Collection(models.Model):
     # collection_id is not needed as a field on this file.  It can be referenced by other models.
     collection_name = models.CharField(max_length=200)
-    collection_description = models.TextField(max_length=280)
+    collection_description = models.TextField(max_length=280, null=True, blank=True)
     # this collection will cease to exist when an Artist deletes their account.
     collection_artist = models.ForeignKey('Artist', on_delete=models.CASCADE)
     # this collection will have many pieces of Artwork inside it.
@@ -80,6 +81,7 @@ class Favorite(models.Model):
     # for now, just the user's username is displayed.
     def __str__(self):
         return f'{self.favorite_artist.user}'
+
 
 # Each Artist can rate a piece of Artwork
 # For Django, creating a model is a valid way to do things.

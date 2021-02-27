@@ -36,8 +36,12 @@ class CollectionAdmin(admin.ModelAdmin):
     filter_horizontal = ('artwork',)
 
 
-# This is for adding multiple ratings to pieces
+# This is for adding to pieces
 # of Artwork.
+class FavoriteAdmin(admin.ModelAdmin):
+    model = Favorite
+    filter_horizontal = ('favorite_artwork',)
+
 
 # Re-register UserAdmin
 admin.site.unregister(User)
@@ -47,4 +51,4 @@ admin.site.register(Artwork, ArtworkAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Tag)
 admin.site.register(Rating)
-admin.site.register(Favorite)
+admin.site.register(Favorite, FavoriteAdmin)
