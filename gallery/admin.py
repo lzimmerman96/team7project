@@ -43,6 +43,11 @@ class FavoriteAdmin(admin.ModelAdmin):
     filter_horizontal = ('favorite_artwork',)
 
 
+# This for for displaying the Fields for Ratings.
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ('rating_artwork', 'rating_level', 'rating_artist')
+
+
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
@@ -50,5 +55,5 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Artwork, ArtworkAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Tag)
-admin.site.register(Rating)
+admin.site.register(Rating, RatingAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
