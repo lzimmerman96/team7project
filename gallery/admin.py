@@ -26,7 +26,8 @@ class UserAdmin(BaseUserAdmin):
 # Artwork submission.
 class ArtworkAdmin(admin.ModelAdmin):
     model = Artwork
-    filter_horizontal = ('artwork_artist', 'artwork_tag')
+    # filter_horizontal = ('artwork_artist', 'artwork_tag')
+    filter_horizontal = ('artwork_tag',)
 
 
 # This is for adding multiple pieces of Artwork

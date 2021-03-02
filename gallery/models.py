@@ -51,10 +51,11 @@ class Artwork(models.Model):
     # Do to this, deletion of an artist does not delete the Artwork.
     # All information about the Artwork including Favorites, what Collection, and Ratings are preserved.
     # However, Artists can reclaim work.
-    artwork_artist = models.ManyToManyField(Artist)
+    # artwork_artist = models.ManyToManyField(Artist)
+    artwork_artist = models.ForeignKey('Artist', on_delete=models.CASCADE)
     # One piece of Artwork can have multiple Tags
     artwork_tag = models.ManyToManyField(Tag, blank=True)
-    artwork_picture = models.ImageField(upload_to='images/', null=True, blank=True)
+    artwork_picture = models.ImageField(upload_to='images/', null=True, blank=True) # comment out null and blank later
 
     def __str__(self):
         return f'{self.artwork_title}'
