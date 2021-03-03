@@ -3,99 +3,106 @@
 {% extends 'gallery/base.html' %}
 {% load static %}
 {% block content %}
-   <body>
-   {% if user.is_authenticated %}
-       <div class="page-container">
+    <body>
+    {% if user.is_authenticated %}
+        <div class="page-container">
 
-           <h2 class="top-menu">Hello {{ user.username }},</h2>
-           <p>Click here to explore the art gallery</p>
-       </div>
-   {% endif %}
-   <div class="content container">
-       <div class="row">
-           <div class="col-md-12">
-               <div class="links">
-                   <!-- Example row of columns -->
-                   <div class="row">
-                       <div class="col-md-3">
-                           <div class="thumbnail">
-                               <img src="{% static "images/artist.jpg" %}" alt="artist"/>
-                               <div class="caption">
-                                   <h2>Artists</h2>
-                                   <p>Great Artists Great Paintings</p>
-                                   <p><a class="btn btn-primary" href="{% url 'gallery:artist_list' %}"
-                                         role="button">View
-                                       details &raquo;</a></p>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-md-3">
-                           <div class="thumbnail">
-                               <img src="{% static "images/artwork.jpg" %}" alt="artwork"/>
-                               <div class="caption">
-                                   <h2>Artwork</h2>
-                                   <p>List of arts from great Artists</p>
-                                   <p><a class="btn btn-primary" href="{% url 'gallery:artwork_list' %}"
-                                         role="button">View
-                                       details &raquo;</a></p>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-md-3">
-                           <div class="thumbnail">
-                               <img src="{% static "images/collection.jpg" %}" alt="collection"/>
-                               <div class="caption">
-                                   <h2>Collection</h2>
-                                   <p>Great collection great surprises</p>
-                                   <p><a class="btn btn-primary" href="{% url 'gallery:collection_list' %}"
-                                         role="button">View
-                                       details &raquo;</a></p>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-md-3">
-                           <div class="thumbnail">
-                               <img src="{% static "images/favorites.png" %}" alt="favorite"/>
-                               <div class="caption">
-                                   <h2>Favorite</h2>
-                                   <p>Set your favorites</p>
-                                   <p><a class="btn btn-primary" href="{% url 'gallery:favorite_list' %}"
-                                         role="button">View
-                                       details &raquo;</a></p>
-                               </div>
-                           </div>
-                       </div>
-                           <div class="col-md-3">
-                           <div class="thumbnail">
-                               <img src="{% static "images/rating.jpg" %}" alt="rating"/>
-                               <div class="caption">
-                                   <h2>Rating</h2>
-                                   <p>Leave your feedback</p>
-                                   <p><a class="btn btn-primary" href="{% url 'gallery:rating_list' %}"
-                                         role="button">View
-                                       details &raquo;</a></p>
-                               </div>
-                           </div>
-                       </div>
+            <h2 class="top-menu">Hello {{ user.username }},</h2>
+            <p>Click here to explore the art gallery</p>
+        </div>
+    {% endif %}
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="links">
+                    <!-- Example row of columns -->
+                    <div class="row">
                         <div class="col-md-3">
-                           <div class="thumbnail">
-                               <img src="{% static "images/tag.png" %}" alt="tag"/>
-                               <div class="caption">
-                                   <h2>Tag</h2>
-                                   <p>Tag the collection</p>
-                                   <p><a class="btn btn-primary" href="{% url 'gallery:tag_list' %}"
-                                         role="button">View
-                                       details &raquo;</a></p>
-                               </div>
-                           </div>
-                       </div>
+                            <div class="thumbnail">
+                                <img src="{% static "images/artist.jpg" %}" alt="artist"/>
+                                <div class="caption">
+                                    <h2>Artists</h2>
+                                    <p>Great Artists Great Paintings</p>
+                                    <p><a class="btn btn-primary" href="{% url 'gallery:artist_list' %}"
+                                          role="button">View
+                                        details &raquo;</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{% static "images/artwork.jpg" %}" alt="artwork"/>
+                                <div class="caption">
+                                    <h2>Artwork</h2>
+                                    <p>List of arts from great Artists</p>
+                                    <p><a class="btn btn-primary" href="{% url 'gallery:artwork_list' %}"
+                                          role="button">View
+                                        details &raquo;</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{% static "images/collection.jpg" %}" alt="collection"/>
+                                <div class="caption">
+                                    <h2>Collection</h2>
+                                    <p>Great collection great surprises</p>
+                                    <p><a class="btn btn-primary" href="{% url 'gallery:collection_list' %}"
+                                          role="button">View
+                                        details &raquo;</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{% static "images/favorites.png" %}" alt="favorite"/>
+                                <div class="caption">
+                                    <h2>Favorite</h2>
+                                    <p>Set your favorites</p>
+                                    <p><a class="btn btn-primary" href="{% url 'gallery:favorite_list' %}"
+                                          role="button">View
+                                        details &raquo;</a></p>
+                                </div>
+                            </div>
+                        </div>
 
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
-   </body>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="links">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{% static "images/rating.jpg" %}" alt="rating"/>
+                                <div class="caption">
+                                    <h2>Rating</h2>
+                                    <p>Leave your feedback</p>
+                                    <p><a class="btn btn-primary" href="{% url 'gallery:rating_list' %}"
+                                          role="button">View
+                                        details &raquo;</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{% static "images/tag.png" %}" alt="tag"/>
+                                <div class="caption">
+                                    <h2>Tag</h2>
+                                    <p>Tag the collection</p>
+                                    <p><a class="btn btn-primary" href="{% url 'gallery:tag_list' %}"
+                                          role="button">View
+                                        details &raquo;</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
 
 {% endblock %}
 
