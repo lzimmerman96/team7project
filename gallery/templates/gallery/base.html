@@ -85,10 +85,12 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
 {#                            <li><a href="{% url 'logout' %}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>#}
+                            <li><a href="{% url 'gallery:update_account_details' pk=request.user.pk %}"><i class ="fa fa-pencil fa-fw"></i> Account Details</a></li>
                         </ul>
                     </li>
                 {% else %}
 {#                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>#}
+                    <li><a href="{% url 'gallery:create_account' %}"><span class="glyphicon glyphicon-plus"></span> Create an Account</a></li>
                 {% endif %}
             </ul>
         </div>
