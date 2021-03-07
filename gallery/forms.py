@@ -1,5 +1,11 @@
 from django import forms
-from .models import Artist, Artwork, Collection, Favorite, Rating, Tag
+from .models import Artist, User, Artwork, Collection, Favorite, Rating, Tag
+
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'email')
 
 
 class ArtistForm(forms.ModelForm):

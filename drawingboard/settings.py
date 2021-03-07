@@ -122,3 +122,5 @@ MEDIA_URL = '/media/'
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
