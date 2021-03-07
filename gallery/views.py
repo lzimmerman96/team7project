@@ -35,7 +35,7 @@ def update_account_details(request, pk):
     account = get_object_or_404(User, pk=pk)
     if request.method == "POST":
         # update
-        form = UpdateUserForm(request.POST, instance=account)
+        form = UpdateArtistForm(request.POST, instance=account)
         if form.is_valid():
             account = form.save(commit=False)
             account.updated_date = timezone.now()
@@ -43,7 +43,7 @@ def update_account_details(request, pk):
             return redirect('gallery:account_details')
     else:
         # edit
-        form = UpdateUserForm(instance=account)
+        form = UpdateArtistForm(instance=account)
     return render(request, 'registration/update_account_details.html', {'form': form})
 
 

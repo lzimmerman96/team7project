@@ -17,5 +17,4 @@ urlpatterns = [
     path('artwork_list', views.artwork_list, name='tag_list'),
     path('create_account', views.create_account, name='create_account'),
     path('account/<int:pk>/edit/', views.update_account_details, name='update_account_details'),
-    # path('update_account_details', views.update_account_details, name='update_account_details')
 ]
