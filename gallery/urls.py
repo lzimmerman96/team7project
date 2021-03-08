@@ -16,5 +16,6 @@ urlpatterns = [
     path('artwork_list', views.artwork_list, name='rating_list'),
     path('artwork_list', views.artwork_list, name='tag_list'),
     path('create_account', views.create_account, name='create_account'),
-    path('account/<int:pk>/edit/', views.update_account_details, name='update_account_details'),
+    path('account_details', views.account_details, name='account_details'),
+    path('account/<int:pk>/<int:pk_alt>/edit', views.update_account_details, name='update_account_details'),
 ]

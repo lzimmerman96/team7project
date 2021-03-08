@@ -31,20 +31,28 @@ def account_details(request):
                   {'registration': account_details})
 
 
-def update_account_details(request, pk):
-    account = get_object_or_404(User, pk=pk)
+def update_account_details(request, pk, pk_alt):
+    user_account = get_object_or_404(User, pk=pk)
+    artist_account = get_object_or_404(Artist, pk=pk_alt)
     if request.method == "POST":
         # update
-        form = UpdateArtistForm(request.POST, instance=account)
-        if form.is_valid():
-            account = form.save(commit=False)
-            account.updated_date = timezone.now()
-            account.save()
+        user_form = UpdateUserForm(request.POST, instance=user_account)
+        artist_form = UpdateArtistForm(request.POST, instance=artist_account)
+        if user_form.is_valid() and artist_form.is_valid():
+            user_account = user_form.save(commit=False)
+            artist_account = artist_form.save(commit=False)
+            user_account.updated_date = artist_account.updated_date = timezone.now()
+            user_account.save()
+            artist_account.save()
             return redirect('gallery:account_details')
     else:
         # edit
-        form = UpdateArtistForm(instance=account)
-    return render(request, 'registration/update_account_details.html', {'form': form})
+        user_form = UpdateUserForm(instance=user_account)
+        artist_form = UpdateArtistForm(instance=artist_account)
+    return render(request, 'registration/update_account_details.html', {
+                            'user_form': user_form,
+                            'artist_form': artist_form
+    })
 
 
 def artist_list(request):
