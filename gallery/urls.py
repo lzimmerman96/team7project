@@ -1,5 +1,8 @@
 from . import views
 from django.urls import path, re_path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 app_name = 'gallery'
 urlpatterns = [
@@ -19,3 +22,7 @@ urlpatterns = [
     path('account_details', views.account_details, name='account_details'),
     path('account/<int:pk>/<int:pk_alt>/edit', views.update_account_details, name='update_account_details'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += staticfiles_urlpatterns()

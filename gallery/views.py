@@ -67,7 +67,7 @@ def artist_list(request):
 
 def artist_new(request):
     if request.method == "POST":
-        form = ArtistForm(request.POST)
+        form = ArtistForm(request.POST, request.FILES)
         if form.is_valid():
             artist = form.save(commit=False)
             artist.created_date = timezone.now()
@@ -83,7 +83,7 @@ def artist_edit(request, pk):
     artist = get_object_or_404(Artist, pk=pk)
     if request.method == "POST":
         # update
-        form = ArtistForm(request.POST, instance=artist)
+        form = ArtistForm(request.POST, request.FILES, instance=artist)
         if form.is_valid():
             artist = form.save(commit=False)
             artist.updated_date = timezone.now()
