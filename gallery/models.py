@@ -92,6 +92,7 @@ class Favorite(models.Model):
 # Each Artist can rate a piece of Artwork
 # For Django, creating a model is a valid way to do things.
 # We can edit this as we go.
+
 # https://stackoverflow.com/questions/45842245/implement-a-multi-part-5-star-rating-system-in-django-1-11
 class Rating(models.Model):
     rating_level = models.IntegerField(default=1, validators=(MaxValueValidator(5), MinValueValidator(1)))
