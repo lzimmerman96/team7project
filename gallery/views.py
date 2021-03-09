@@ -6,12 +6,13 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 
-
 now = timezone.now()
+
 
 def landing_page(request):
     return render(request, 'gallery/landing_page.html',
-                    {'gallery':landing_page})
+                  {'gallery': landing_page})
+
 
 def home(request):
     return render(request, 'gallery/home.html',
@@ -53,8 +54,8 @@ def update_account_details(request, pk, pk_alt):
         user_form = UpdateUserForm(instance=user_account)
         artist_form = UpdateArtistForm(instance=artist_account)
     return render(request, 'registration/update_account_details.html', {
-                            'user_form': user_form,
-                            'artist_form': artist_form
+        'user_form': user_form,
+        'artist_form': artist_form
     })
 
 
@@ -71,9 +72,7 @@ def artist_new(request):
             artist = form.save(commit=False)
             artist.created_date = timezone.now()
             artist.save()
-            artists = Artist.objects.all()
-            return render(request, 'gallery/artist_list.html',
-                         {'artists': artists})
+            return redirect('gallery:artist_list')
     else:
         form = ArtistForm()
         # print("Else")
@@ -89,9 +88,7 @@ def artist_edit(request, pk):
             artist = form.save(commit=False)
             artist.updated_date = timezone.now()
             artist.save()
-            artist = Artist.objects.all()
-            return render(request, 'gallery/artist_list.html',
-                         {'artists': artist})
+            return redirect('gallery:artist_list')
     else:
         # edit
         form = ArtistForm(instance=artist)
