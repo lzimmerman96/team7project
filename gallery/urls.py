@@ -4,6 +4,8 @@ from django.urls import path, re_path
 
 app_name = 'gallery'
 urlpatterns = [
+    path('',views.landing_page, name='landing_page'),
+    re_path(r'^landing_page/$', views.landing_page, name='landing_page'),
     path('', views.home, name='home'),
     re_path(r'^home/$', views.home, name='home'),
     path('artist_list', views.artist_list, name='artist_list'),

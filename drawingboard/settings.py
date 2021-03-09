@@ -116,7 +116,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # MEDIA_ROOT is for server path to store files in the computer.
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL is the reference URL for browsers to access the files over Http.
 MEDIA_URL = '/media/'
 
