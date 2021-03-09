@@ -49,11 +49,13 @@ just after the  <html lang="en">
                     <td>{{ artist.artist_role }}</td>
                     <td>{{ artist.description}}</td>
                     <td><img src = "media/{{artist.profile_picture}}" border=3 height =150 width=150 /></td>
+                    {% ifequal user.get_username artist.user|stringformat:"s" %}
                     <td><a href="{% url 'gallery:artist_edit' pk=artist.pk %}" class="btn btn-warning">Edit</a>
                     <td><a href="{% url 'gallery:artist_delete' pk=artist.pk %}"
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
                     </td>
+                    {% endifequal %}
                 </tr>
             {% endfor %}
             </tbody>
