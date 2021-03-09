@@ -51,12 +51,16 @@
                     <td>{{ artwork.artwork_artist }}</td>
                     <td>{{ artwork.artwork_tag }}</td>
                     <td><img src = "media/{{artwork.artwork_picture}}" border=3 height =150 width=150 /></td>
+
+                    {% ifequal user.get_username artwork.artwork_artist|stringformat:"s" %}
                     <td><a href="" class="btn btn-warning">Edit</a>
                     </td>
                     <td><a href=""
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
                     </td>
+                {% endifequal %}
+
                 </tr>
             {% endfor %}
             </tbody>
