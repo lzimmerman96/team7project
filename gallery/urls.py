@@ -1,13 +1,11 @@
-from django.conf.urls import url
 from . import views
 from django.urls import path, re_path
 
 app_name = 'gallery'
 urlpatterns = [
-    path('',views.landing_page, name='landing_page'),
-    re_path(r'^landing_page/$', views.landing_page, name='landing_page'),
     path('', views.home, name='home'),
     re_path(r'^home/$', views.home, name='home'),
+    re_path(r'^landing_page/$', views.landing_page, name='landing_page'),
     path('artist_list', views.artist_list, name='artist_list'),
     path('artist/create/', views.artist_new, name='artist_new'),
     path('artist/<int:pk>/edit/', views.artist_edit, name='artist_edit'),

@@ -48,8 +48,7 @@ just after the  <html lang="en">
                     <td>{{ artist.user }}</td>
                     <td>{{ artist.artist_role }}</td>
                     <td>{{ artist.description}}</td>
-{#                    <td>{{  }}</td>#}
-                    <td><img src ="media/images/5b566bc71d308_thumb900.jpg" border=3 height =100 width=300 /></td>
+                    <td><img src = "media/{{artist.profile_picture}}" border=3 height =150 width=150 /></td>
                     <td><a href="{% url 'gallery:artist_edit' pk=artist.pk %}" class="btn btn-warning">Edit</a>
                     <td><a href="{% url 'gallery:artist_delete' pk=artist.pk %}"
                            onclick="return confirm('Are you sure you want to delete?')"
