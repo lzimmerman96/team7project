@@ -9,6 +9,9 @@ from django.shortcuts import redirect
 
 now = timezone.now()
 
+def landing_page(request):
+    return render(request, 'gallery/landing_page.html',
+                    {'gallery':landing_page})
 
 def home(request):
     return render(request, 'gallery/home.html',

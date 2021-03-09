@@ -48,17 +48,13 @@ just after the  <html lang="en">
                     <td>{{ artist.user }}</td>
                     <td>{{ artist.artist_role }}</td>
                     <td>{{ artist.description}}</td>
-                    <td>{{ artist.profile_picture }}</td>
+{#                    <td>{{  }}</td>#}
+                    <td><img src ="media/images/5b566bc71d308_thumb900.jpg" border=3 height =100 width=300 /></td>
                     <td><a href="{% url 'gallery:artist_edit' pk=artist.pk %}" class="btn btn-warning">Edit</a>
-
                     <td><a href="{% url 'gallery:artist_delete' pk=artist.pk %}"
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
                     </td>
-
-{#                    <td><a href="{% url 'gallery:summary' pk=artist.pk %}"#}
-{#                           class="btn btn-primary">Summary</a>#}
-
                 </tr>
             {% endfor %}
             </tbody>
