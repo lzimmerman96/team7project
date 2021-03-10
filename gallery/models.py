@@ -17,7 +17,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#extending-the-existing-user-model
 class Artist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    artist_role = models.BooleanField(default=False)
+    artist_role = models.BooleanField(default=True)
     description = models.TextField(max_length=280, null=True, blank=True)  # this is the default for all descriptions
 
     # https://www.geeksforgeeks.org/python-uploading-images-in-django/
