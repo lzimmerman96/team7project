@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% block body_block %}
+    <h1>Delete {{ artwork.category}}?</h1>
 
-</body>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Delete">
+        <a href="">Cancel</a>
+
+    </form>
+
+{% endblock %}
+
 </html>

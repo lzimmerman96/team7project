@@ -118,3 +118,37 @@ def artwork_list(request):
     print(artwork)
     return render(request, 'gallery/artwork_list.html',
                   {'artworks': artwork})
+
+def artwork_new(request):
+    if request.method == "POST":
+        form = ArtworkForm(request.POST, request.FILES)
+        if form.is_valid():
+            artwork = form.save(commit=False)
+            artwork.created_date = timezone.now()
+            artwork.save()
+            return redirect('gallery:artwork_list')
+    else:
+        form = ArtworkForm()
+        # print("Else")
+    return render(request, 'gallery/artwork_new.html', {'form': form})
+
+
+def artwork_edit(request, pk):
+    artwork = get_object_or_404(Artwork, pk=pk)
+    if request.method == "POST":
+        # update
+        form = ArtworkForm(request.POST, request.FILES, instance=artwork)
+        if form.is_valid():
+            artwork = form.save(commit=False)
+            artwork.updated_date = timezone.now()
+            artwork.save()
+            return redirect('gallery:artwork_list')
+    else:
+        # edit
+        form = ArtworkForm(instance=artwork)
+    return render(request, 'gallery/artwork_edit.html', {'form': form})
+
+def artwork_delete(request, pk):
+    artwork = get_object_or_404(Artwork, pk=pk)
+    artwork.delete()
+    return redirect('gallery:artwork_list')

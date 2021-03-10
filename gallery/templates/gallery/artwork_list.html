@@ -53,9 +53,9 @@
                     <td><img src = "media/{{artwork.artwork_picture}}" border=3 height =150 width=150 /></td>
 
                     {% ifequal user.get_username artwork.artwork_artist|stringformat:"s" %}
-                    <td><a href="" class="btn btn-warning">Edit</a>
+                    <td><a href="{% url 'gallery:artwork_edit' pk=artwork.pk %}" class="btn btn-warning">Edit</a>
                     </td>
-                    <td><a href=""
+                    <td><a href="{% url 'gallery:artwork_delete' pk=artwork.pk %}"
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
                     </td>
@@ -67,6 +67,10 @@
         </table>
 
     </div>
+     <div class="row">
+        <a href="{% url 'gallery:artwork_new' %}" class="row"><span
+                    class="btn btn-primary">Add Artwork</span></a>
+     </div>
     </body>
     </html>
 {% endblock %}
