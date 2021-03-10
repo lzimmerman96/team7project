@@ -23,17 +23,23 @@ def home(request):
 # if account is created successfully, user will be automatically logged in and redirected to home page
 def create_account(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
+        user_form = CreateUserAccountForm(request.POST)
+        artist_form = CreateArtistAccountForm(request.POST)
+        if user_form.is_valid() and artist_form.is_valid():
+            newuser = user_form.save()
+            artist = artist_form.save(commit=False)
+            artist.user = newuser
+            artist.save()
+            username = user_form.cleaned_data.get('username')
+            password = user_form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('gallery:home')
     else:
-        form = UserCreationForm()
-    return render(request, 'registration/create_account.html', {'form': form})
+        user_form = CreateUserAccountForm()
+        artist_form = CreateArtistAccountForm
+    return render(request, 'registration/create_account.html',
+                  {'user_form': user_form, 'artist_form': artist_form})
 
 
 def account_details(request):

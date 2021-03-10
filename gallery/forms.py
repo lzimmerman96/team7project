@@ -1,17 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Artist, User, Artwork, Collection, Favorite, Rating, Tag
-
-
-class UpdateUserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'username', 'email')
-
-
-class UpdateArtistForm(forms.ModelForm):
-    class Meta:
-        model = Artist
-        fields = ('description', 'profile_picture')
 
 
 class ArtistForm(forms.ModelForm):
@@ -48,3 +37,36 @@ class TagForm(forms.ModelForm):
     class Meta:
         model = Tag
         fields = ('tag_name', 'tag_description')
+
+
+# for account creation
+class CreateArtistAccountForm(forms.ModelForm):
+
+    class Meta(ArtistForm.Meta):
+        model = Artist
+        fields = ('profile_picture', 'description')
+
+
+# for account creation
+class CreateUserAccountForm(UserCreationForm):
+    first_name = forms.CharField(max_length=20, required=False)
+    last_name = forms.CharField(max_length=20, required=False)
+    email = forms.EmailField(max_length=60)
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'username')
+
+
+# for account updating
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'email')
+
+
+# for account updating
+class UpdateArtistForm(forms.ModelForm):
+    class Meta:
+        model = Artist
+        fields = ('description', 'profile_picture')
