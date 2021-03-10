@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
+from django.core.mail import send_mail
 
 now = timezone.now()
 
@@ -119,6 +120,7 @@ def artwork_list(request):
     return render(request, 'gallery/artwork_list.html',
                   {'artworks': artwork})
 
+
 def artwork_new(request):
     if request.method == "POST":
         form = ArtworkForm(request.POST, request.FILES)
@@ -148,7 +150,24 @@ def artwork_edit(request, pk):
         form = ArtworkForm(instance=artwork)
     return render(request, 'gallery/artwork_edit.html', {'form': form})
 
+
 def artwork_delete(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
     artwork.delete()
     return redirect('gallery:artwork_list')
+
+
+def send_email(request):
+    # add send e-mail confirmation
+    # set up the subject, message, and user’s email address
+    subject = ''
+    message = ''
+    user = request.user  # request was passed to the method as a parameter for the view
+    user_email = user.email  # pull user’s email out of the user record
+    # try to send the e-mail – note you can send to multiple users – this just sends
+    # to one user.
+    try:
+        send_mail(subject, message, 'groupsevenweb@gmail.com', [user_email])
+        sent = True
+    except:
+        print("Error sending e-mail")

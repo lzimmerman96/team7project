@@ -8,7 +8,12 @@
         <form method="POST">
             {% csrf_token %}
             {{ user_form.as_p }}
+            {# Assumes you setup the password_reset view in your URLconf #}
+            <button><a href="{% url 'password_reset' %}">Reset password</a></button>
+            <br>
+            <br>
             {{ artist_form.as_p }}
+
             <button type="submit" name="submit">Update</button>
             <a href="{% url 'gallery:account_details' %}">Cancel</a> {# want css to make this look like a button #}
         </form>
