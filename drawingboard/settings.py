@@ -53,8 +53,7 @@ ROOT_URLCONF = 'drawingboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'gallery/templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'gallery/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,7 +113,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # MEDIA_ROOT is for server path to store files in the computer.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL is the reference URL for browsers to access the files over Http.
@@ -130,8 +129,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'groupsevenweb@gmail.com'
 EMAIL_HOST_PASSWORD = 'Groupseven123!'
-EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
