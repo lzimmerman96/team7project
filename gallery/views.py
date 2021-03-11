@@ -208,3 +208,9 @@ def collection_edit(request, pk):
         # edit
         form = CollectionForm(instance=collection)
     return render(request, 'gallery/collection_edit.html', {'form': form})
+
+
+def collection_delete(request, pk):
+    collection = get_object_or_404(Collection, pk=pk)
+    collection.delete()
+    return redirect('gallery:collection_list')

@@ -20,6 +20,7 @@ urlpatterns = [
     path('collection_list', views.collection_list, name='collection_list'),
     path('collection/create/', views.collection_new, name='collection_new'),
     path('collection/<int:pk>/edit/', views.collection_edit, name='collection_edit'),
+    path('collection/<int:pk>/delete/', views.collection_delete, name='collection_delete'),
     path('artwork_list', views.artwork_list, name='favorite_list'),
     path('artwork_list', views.artwork_list, name='rating_list'),
     path('artwork_list', views.artwork_list, name='tag_list'),
