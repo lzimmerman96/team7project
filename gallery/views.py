@@ -178,3 +178,33 @@ def collection_list(request):
     print(collection)
     return render(request, 'gallery/collection_list.html',
                   {'collections': collection})
+
+
+def collection_new(request):
+    if request.method == "POST":
+        form = CollectionForm(request.POST, request.FILES)
+        if form.is_valid():
+            collection = form.save(commit=False)
+            collection.created_date = timezone.now()
+            collection.save()
+            return redirect('gallery:collection_list')
+    else:
+        form = CollectionForm()
+        # print("Else")
+    return render(request, 'gallery/collection_new.html', {'form': form})
+
+
+def collection_edit(request, pk):
+    collection = get_object_or_404(Collection, pk=pk)
+    if request.method == "POST":
+        # update
+        form = CollectionForm(request.POST, request.FILES, instance=collection)
+        if form.is_valid():
+            collection = form.save(commit=False)
+            collection.updated_date = timezone.now()
+            collection.save()
+            return redirect('gallery:collection_list')
+    else:
+        # edit
+        form = CollectionForm(instance=collection)
+    return render(request, 'gallery/collection_edit.html', {'form': form})

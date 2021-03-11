@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'gallery/base.html' %}
+{% block content %}
+    <h1>Add a New Collection</h1>
+    <form method="POST" enctype="multipart/form-data" class="collection-form">{% csrf_token %}
+          {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+{% endblock %}
+
+</html>
