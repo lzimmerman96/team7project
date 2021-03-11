@@ -25,7 +25,7 @@ def home(request):
 def create_account(request):
     if request.method == "POST":
         user_form = CreateUserAccountForm(request.POST)
-        artist_form = CreateArtistAccountForm(request.POST)
+        artist_form = CreateArtistAccountForm(request.POST, request.FILES)
         if user_form.is_valid() and artist_form.is_valid():
             newuser = user_form.save()
             artist = artist_form.save(commit=False)
@@ -54,7 +54,7 @@ def update_account_details(request, pk, pk_alt):
     if request.method == "POST":
         # update
         user_form = UpdateUserForm(request.POST, instance=user_account)
-        artist_form = UpdateArtistForm(request.POST, instance=artist_account)
+        artist_form = UpdateArtistForm(request.POST, request.FILES, instance=artist_account)
         if user_form.is_valid() and artist_form.is_valid():
             user_account = user_form.save(commit=False)
             artist_account = artist_form.save(commit=False)
