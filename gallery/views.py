@@ -171,3 +171,10 @@ def send_email(request):
         sent = True
     except:
         print("Error sending e-mail")
+
+
+def collection_list(request):
+    collection = Collection.objects.all()
+    print(collection)
+    return render(request, 'gallery/collection_list.html',
+                  {'collections': collection})
