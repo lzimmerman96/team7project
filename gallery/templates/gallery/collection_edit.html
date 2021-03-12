@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 {% extends 'gallery/base.html' %}
 just after the  <html lang="en">
-
+{% load static %}
 {% block content %}
+    <head>
+        <style type="text/css">
+            body{
+                margin: 0;
+                padding: 0;
+                background: url('{% static "images/collectionbg1.jpg" %}');
+                background-size: cover;
+                background-postion: center;
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
     <h1>Edit Collection</h1>
     <form method="POST" enctype="multipart/form-data" class="collection_form">{% csrf_token %}
         {{ form.as_p }}

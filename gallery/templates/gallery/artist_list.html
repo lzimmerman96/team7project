@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 {% extends 'gallery/base.html' %}
 just after the  <html lang="en">
+{% load static %}
 {% block content %}
-
     <html>
     <head>
         <meta charset="UTF-8">
         <title>Drawing Board Art Gallery</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
+        <style type="text/css">
+            body{
+                margin: 0;
+                padding: 0;
+                background: url('{% static "images/artistbg.jpg" %}');
+                background-size: cover;
+                background-postion: center;
+                font-family: sans-serif;
+            }
+        </style>
     </head>
     <body>
     <style>

@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends 'gallery/base.html' %}
+{% load static %}
 {% block content %}
+    <head>
+    <meta charset="utf-8">
+        <style type="text/css">
+            body{
+                margin: 0;
+                padding: 0;
+                background: url('{% static "images/artworkbg.jpg" %}');
+                background-size: cover;
+                background-postion: center;
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
     <h1>Add a New Artwork</h1>
     <form method="POST" enctype="multipart/form-data" class="artwork-form">{% csrf_token %}
           {{ form.as_p }}

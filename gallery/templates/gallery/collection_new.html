@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends 'gallery/base.html' %}
+{% load static %}
 {% block content %}
+    <head>
+        <style type="text/css">
+            body{
+                margin: 0;
+                padding: 0;
+                background: url('{% static "images/collectionbg1.jpg" %}');
+                background-size: cover;
+                background-postion: center;
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
     <h1>Add a New Collection</h1>
     <form method="POST" enctype="multipart/form-data" class="collection-form">{% csrf_token %}
           {{ form.as_p }}
