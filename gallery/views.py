@@ -116,7 +116,6 @@ def artist_delete(request, pk):
 
 def artwork_list(request):
     artwork = Artwork.objects.all()
-    print(artwork)
     return render(request, 'gallery/artwork_list.html',
                   {'artworks': artwork})
 
@@ -175,7 +174,6 @@ def send_email(request):
 
 def collection_list(request):
     collection = Collection.objects.all()
-    print(collection)
     return render(request, 'gallery/collection_list.html',
                   {'collections': collection})
 
