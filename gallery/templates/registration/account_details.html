@@ -2,13 +2,24 @@
 <html lang="en">
 {% extends "gallery/base.html" %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href=""{% static "css/account_details.css" %}>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
 
 {% block content %}
 
-    <div class="row">
-        <h1><img alt ="Profile Picture" src = "media/{{ user.artist.profile_picture }}" width=150px height=auto > {{ user.username }} Account Details:</h1>
-    </div>
+    {# if user has a profile picture, show by username #}
+    {% if user.artist.profile_picture %}
+        <div class="row">
+            <h1><img alt ="Profile Picture" src = "media/{{ user.artist.profile_picture }}" width=150px height=auto > {{ user.username }} Account Details:</h1>
+        </div>
+    {# if user does not have profile picture, just show username #}
+    {% else %}
+        <div class="row">
+            <h1>{{ user.username }} Account Details:</h1>
+        </div>
+    {% endif %}
+
     <div class ="row">
         <table class="table table-striped table-bordered table-hover">
             <tr>

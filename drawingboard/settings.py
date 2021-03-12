@@ -112,8 +112,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # MEDIA_ROOT is for server path to store files in the computer.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL is the reference URL for browsers to access the files over Http.
@@ -131,7 +132,6 @@ EMAIL_HOST_USER = 'groupsevenweb@gmail.com'
 EMAIL_HOST_PASSWORD = 'Groupseven123!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
 
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
