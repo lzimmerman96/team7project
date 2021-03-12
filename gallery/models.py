@@ -82,7 +82,7 @@ class Collection(models.Model):
 class Favorite(models.Model):
     favorite_artist = models.ForeignKey('Artist', on_delete=models.CASCADE)
     # A Favorite folder can have no submissions in it so far.
-    favorite_artwork = models.ManyToManyField(Artwork, blank=True)
+    favorite_artwork = models.ForeignKey('Artwork', on_delete=models.CASCADE)
 
     # for now, just the user's username is displayed.
     def __str__(self):

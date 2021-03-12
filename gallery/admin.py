@@ -39,9 +39,9 @@ class CollectionAdmin(admin.ModelAdmin):
 
 # This is for adding to pieces
 # of Artwork.
-class FavoriteAdmin(admin.ModelAdmin):
-    model = Favorite
-    filter_horizontal = ('favorite_artwork',)
+# class FavoriteAdmin(admin.ModelAdmin):
+#    model = Favorite
+#   filter_horizontal = ('favorite_artwork',)
 
 
 # This for for displaying the Fields for Ratings.
@@ -57,4 +57,4 @@ admin.site.register(Artwork, ArtworkAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Tag)
 admin.site.register(Rating, RatingAdmin)
-admin.site.register(Favorite, FavoriteAdmin)
+admin.site.register(Favorite)
