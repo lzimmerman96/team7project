@@ -30,10 +30,12 @@
                 <td><strong>Last Name:</strong></td>
                 <td>{{ user.last_name }}</td>
             </tr>
-            <tr>
-                <td><strong>Description:</strong></td>
-                <td>{{ user.artist.description }}</td>
-            </tr>
+            {% if user.artist.artist_role  %}
+                <tr>
+                    <td><strong>Description:</strong></td>
+                    <td>{{ user.artist.description }}</td>
+                </tr>
+            {% endif %}
             <tr>
                 <td><strong>User Name:</strong></td>
                 <td>{{ user.username }}</td>
@@ -51,9 +53,15 @@
     </div>
 
     <div class="row">
+        {% if user.artist.artist_role %}
             <a href="{% url 'gallery:update_account_details' pk=user.pk pk_alt=user.artist.pk %}" class="row">
                 <span class="btn btn-primary">Update Details</span>
             </a>
+        {% else %}
+            <a href="{% url 'gallery:user_update_account_details' pk=user.pk %}" class="row">
+                <span class="btn btn-primary">Update Details</span>
+            </a>
+        {% endif %}
     </div>
 
 {% endblock %}

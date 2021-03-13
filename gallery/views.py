@@ -72,6 +72,22 @@ def update_account_details(request, pk, pk_alt):
     })
 
 
+def user_update_account_details(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == "POST":
+        # update
+        user_form = UpdateUserForm(request.POST, instance=user)
+        if user_form.is_valid():
+            user = user_form.save(commit=False)
+            user.updated_date = timezone.now()
+            user.save()
+            return redirect('gallery:account_details')
+    else:
+        # edit
+        user_form = UpdateUserForm(instance=user)
+    return render(request, 'registration/update_account_details.html', {'user_form': user_form})
+
+
 def artist_list(request):
     artist = Artist.objects.all()
     return render(request, 'gallery/artist_list.html',
