@@ -88,6 +88,12 @@ def user_update_account_details(request, pk):
     return render(request, 'registration/update_account_details.html', {'user_form': user_form})
 
 
+def user_delete_account(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    user.delete()
+    return redirect('gallery:home')
+
+
 def artist_list(request):
     artist = Artist.objects.all()
     return render(request, 'gallery/artist_list.html',

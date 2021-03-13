@@ -28,6 +28,7 @@ urlpatterns = [
     path('account_details', views.account_details, name='account_details'),
     path('account/<int:pk>/<int:pk_alt>/edit', views.update_account_details, name='update_account_details'),
     path('account/<int:pk>/edit', views.user_update_account_details, name='user_update_account_details'),
+    path('account/<int:pk>/delete', views.user_delete_account, name='user_delete_account'),
 ]
 
 urlpatterns += [

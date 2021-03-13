@@ -54,15 +54,15 @@
 
     <div class="row">
         {% if user.artist.artist_role %}
-            <a href="{% url 'gallery:update_account_details' pk=user.pk pk_alt=user.artist.pk %}" class="row">
+            <a href="{% url 'gallery:update_account_details' pk=user.pk pk_alt=user.artist.pk %}">
                 <span class="btn btn-primary">Update Details</span>
             </a>
         {% else %}
-            <a href="{% url 'gallery:user_update_account_details' pk=user.pk %}" class="row">
+            <a href="{% url 'gallery:user_update_account_details' pk=user.pk %}">
                 <span class="btn btn-primary">Update Details</span>
             </a>
         {% endif %}
-            <a href="{% url 'gallery:artist_delete' pk=user.pk %}" onclick="return confirm('Are you sure you want to delete?')" class="row">
+            <a href="{% url 'gallery:user_delete_account' pk=user.pk %}" onclick="return confirm('Are you sure you want to delete?')">
                 <span class="btn btn-danger">Delete Account</span>
             </a>
     </div>
