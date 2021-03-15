@@ -17,8 +17,11 @@ def landing_page(request):
 
 
 def home(request):
-    return render(request, 'gallery/home.html',
-                  {'gallery': home})
+    artwork = Artwork.objects.all()
+    allart = {'artworks': artwork}
+    homefinal = {'gallery': home}
+    return render(request, 'gallery/home.html', allart)
+
 
 
 # if account is created successfully, user will be automatically logged in and redirected to home page

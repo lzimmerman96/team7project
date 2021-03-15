@@ -1,153 +1,141 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Drawing Board Art gallery</title>
-    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
 
-        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {
-            height: 450px
-        }
 
-        /* Set gray background color and 100% height */
-        .sidenav {
-            padding-top: 20px;
-            background-color: #f1f1f1;
-            height: 100%;
-        }
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        /* Set black background color, white text and some padding */
-        footer {
-            background-color: #555;
-            color: white;
-            padding: 15px;
-        }
+<script>
+    $(function () {
+      $('[data-toggle="popover"]').popover({ trigger: "hover" })
+    })
 
-        /* On small screens, set height to 'auto' for sidenav and grid */
-        @media screen and (max-width: 767px) {
-            .sidenav {
-                height: auto;
-                padding: 15px;
-            }
+    $('.carousel').carousel({
+      interval: 10
+    })
 
-            .row.content {
-                height: auto;
-            }
-        }
-    </style>
+
+</script>
+
 </head>
-<body id="app-layout">
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
+<style>
+    body, html{
+        font-family: 'Roboto', sans-serif;
+        height: 100%;
+       background-color: black;
 
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#myNavbar">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+    }
 
-            <!-- Branding Image -->
-            <a class="navbar-brand" href="/">
-                Drawing Board Art Gallery
-            </a>
+    #blur {
+        background-image: url("{% static "images/home.jpg" %}");
+        height: 100%;
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        background-size: cover;
+        z-index: -2;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .show_hide {
+        display:none;
+    }
+
+    .sea {
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaW5ZTWluIG1lZXQiIHZpZXdCb3g9IjAgMCAxODAgMTciIHZlcnNpb249IjEuMSI+PHRpdGxlPnNlYS1mZzwvdGl0bGU+PGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+PGcgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iI0ZGRDAwNCI+PHBhdGggZD0iTTAgMUMxMCAxIDIwIDYgMzAgNiA0MCA2IDUwIDEgNjAgMSA3MCAxIDgwIDYgOTAgNiAxMDAgNiAxMTAgMSAxMjAgMSAxMzAgMSAxNDAgNiAxNTAgNiAxNjAgNiAxNzAgMSAxODAgMUwxODAgMTcgMCAxNyAwIDFaIi8+PC9nPjwvZz48L3N2Zz4N), url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaW5ZTWluIG1lZXQiIHZpZXdCb3g9IjAgMCAxODAgMTciIHZlcnNpb249IjEiPjx0aXRsZT5zZWEtYmc8L3RpdGxlPjxkZXNjcmlwdGlvbj48L2Rlc2NyaXB0aW9uPjxnIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNGRkVGQUIiPjxwYXRoIGQ9Ik0wIDFDMyAxIDcgMyAxMCAzIDEzIDMgMTcgMSAyMCAxIDIzIDEgMjcgMyAzMCAzIDMzIDMgMzcgMSA0MCAxIDQzIDEgNDcgMyA1MCAzIDUzIDMgNTcgMSA2MCAxIDYzIDEgNjcgMyA3MCAzIDczIDMgNzcgMSA4MCAxIDgzIDEgODcgMyA5MCAzIDkzIDMgOTcgMSAxMDAgMSAxMDMgMSAxMDcgMyAxMTAgMyAxMTMgMyAxMTcgMSAxMjAgMSAxMjMgMSAxMjcgMyAxMzAgMyAxMzMgMyAxMzcgMSAxNDAgMSAxNDMgMSAxNDcgMyAxNTAgMyAxNTMgMyAxNTcgMSAxNjAgMSAxNjMgMSAxNjcgMyAxNzAgMyAxNzMgMyAxNzcgMSAxODAgMUwxODAgMTYgMCAxNiAwIDFaIi8+PC9nPjwvZz48L3N2Zz4N);
+      background-repeat: repeat-x;
+      background-size: 900px auto, 900px auto;
+      background-position: 0 bottom, 0 bottom;
+      width: 100%;
+      height: 100%;
+      animation: sea 15s ease infinite;
+      transform: scaleY(-1);
+        z-index: -10;
+    }
+
+    @keyframes sea {
+      0% {
+        background-position: -100px bottom, 50px bottom;
+      }
+      50% {
+        background-position: 100px bottom, -50px bottom;
+      }
+      100% {
+        background-position: -100px bottom, 50px bottom;
+      }
+    }
+</style>
+
+
+<body>
+
+<!--NAVBAR-->
+<nav class="navbar navbar-expand-lg navbar-dark" style="border-radius: 0 !important; -moz-border-radius: 0 !important; background: #3d348b; margin: 0; z-index: 2; position: fixed; width: 100%"> <a class="navbar-brand" href="#" style="padding: 0"> <img src="{% static "images/whitelogo.png" %}" width=50em height=50em class="d-inline-block align-top" alt=""> </a>
+<h4 style="color: white">Drawing Board</h4>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active"> <a class="nav-link" href="{% url 'gallery:home' %}">Home <span class="sr-only">(current)</span></a> </li>
+
+      <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:artist_list' %}">Artist List</a> </li>
+      <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:artwork_list' %}">Artwork List</a> </li>
+      <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:collection_list' %}">Collection List</a> </li>
+
+    <!---RIGHT-NAVBAR--->
+    {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #3d348b;">
+          <a class="dropdown-item" href="{% url 'gallery:account_details' %}" style = "color: white">Account Details</a>
+          <a class="dropdown-item" href="{% url 'password_change' %}" style = "color: white">Change Password</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'logout' %}" style = "color: white">Logout</a>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="{% url 'gallery:home' %}">Home</a></li>
-                <li><a href="{% url 'gallery:artist_list' %}">Artists</a></li>
-                <li><a href="{% url 'gallery:artwork_list' %}">Artworks</a></li>
-                <li><a href="{% url 'gallery:collection_list' %}">Collections</a></li>
-                <li><a href="{% url 'gallery:favorite_list' %}">Favorites</a></li>
-                <li><a href="{% url 'gallery:rating_list' %}">Ratings</a></li>
-                <li><a href="{% url 'gallery:tag_list' %}">Tags</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'gallery:account_details' %}"><i class ="fa fa-pencil fa-fw"></i> Account Details</a></li>
-                            <li><a href="{% url 'password_change' %}"><i class="fa fa-btn fa-sign-out"></i>Change Password</a></li>
-                            <li><a href="{% url 'logout' %}"><i class="fa fa-btn fa-sign-out"></i> Logout</a></li>
-                        </ul>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'gallery:create_account' %}"><span class="glyphicon glyphicon-plus"></span> Create an Account</a></li>
-                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
+      </li>
+    {% else %}
+
+        <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:create_account' %}"><span class="glyphicon glyphicon-plus"></span> Create an Account</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a> </li>
+
+    {% endif %}
+
+    <!---END-OF-RIGHT-NAVBAR--->
+    </ul>
+
+  </div>
 </nav>
-<div class="content container">
-    <div class="row">
-        <div class="col-md-8">
-            {% block content %}
-                <div class="links">
-                    <!-- Example row of columns -->
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <img src="{% static "images/artist.jpg" %}" alt="artist logo"/>
-                                <div class="caption">
-                                    <h2>Customer</h2>
-                                    <p>Delighting customers and giving them a great dining experience is our main goal. </p>
-                                    {% if user.is_authenticated %}
-                                        <p><a class="btn btn-default" href="{% url 'gallery:artist_list' %}"
-                                              role="button">View
-                                            details &raquo;</a></p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <img src="{% static "images/artwork.jpg" %}" alt="artwork logo"/>
-                                <div class="caption">
-                                    <h2>Artworks</h2>
-                                    <p>Experience great level of artworks from great artists</p>
-                                    {% if user.is_authenticated %}
-                                    <p><a class="btn btn-default" href="{% url 'gallery:artwork_list' %}"
-                                           role="button">View
-                                        details &raquo;</a></p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <img src="{% static "images/collection.jpg" %}" alt="art collection"/>
-                                <div class="caption">
-                                    <h2>Services</h2>
-                                    <p>High quality products at affordable prices.</p>
-                                    <p><a class="btn btn-default" href="{% url 'gallery:collection_list' %}" role="button">View
-                                        details &raquo;</a></p>
-                                </div>
-                            </div>
-                        </div>
+<!--END-OF-NAVBAR-->
 
-                    </div>
-                </div>
-            {% endblock %}
-        </div>
-    </div>
+<!--NAVBAR-FOLDED-->
+<div style = "-webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%); clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%); background-color: #28225d; height: 25px; box-shadow:inset 0 0 1em rgba(0, 0, 0, 0.2); position: relative; z-index: 1; top: 60px;">
+</div>
+<!--END-OF-NAVBAR-FOLDED-->
+
+<!--BLUR-->
+<!---<div id = "blur"></div>--->
+<!--END-OF-BLUR-->
+
+
+{% block content %}
+{% endblock %}
+
 </body>
 </html>
