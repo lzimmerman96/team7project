@@ -17,6 +17,7 @@ urlpatterns = [
     path('artwork_list', views.artwork_list, name='artwork_list'),
     path('artwork/create/', views.artwork_new, name='artwork_new'),
     path('artwork/<int:pk>/edit/', views.artwork_edit, name='artwork_edit'),
+    path('artwork/<int:pk>/details/', views.artwork_details, name='artwork_details'),
     path('artwork/<int:pk>/delete/', views.artwork_delete, name='artwork_delete'),
     path('collection_list', views.collection_list, name='collection_list'),
     path('collection/create/', views.collection_new, name='collection_new'),

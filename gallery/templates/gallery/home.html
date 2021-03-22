@@ -123,7 +123,7 @@
 
 <!--END-OF-DIV-->
 <!--SIDE-MENU-->
-<div class = "sidemenu" class = "col-8" style = "background: linear-gradient(180deg, #483fa6 0%, #28225d 100%); height: 100%; z-index: 1; top: 0; position: fixed; left: 0; box-shadow: 10px 10px #28225d;" >
+<div class = "sidemenu" class = "col-8" style = "background: linear-gradient(180deg, #483fa6 0%, #28225d 100%); height: 100%; z-index: 2; top: 0; position: fixed; left: 0; box-shadow: 10px 10px #28225d;" >
     <ul class="list-group " style="z-index: 2; margin-top: 90px; padding: 5px;">
         <h2 style="color: white; text-align: center; margin: 0 0 10px; text-decoration: underline;">Links</h2>
         <a href="{% url 'gallery:artist_list' %}" class="homebutton" role="button" aria-disabled="true">Artists</a>
@@ -140,7 +140,7 @@
 <div style=" margin-top: 2em; margin-left: 190px; position: absolute;  overflow: auto; height: 100vm;" >
     <section id="photos">
     {% for artwork in artworks %}
-        <a href="{% url 'gallery:artwork_edit' pk=artwork.pk %}">
+        <a href="{% url 'gallery:artwork_details' pk=artwork.pk %}">
         <img src="{{ artwork.artwork_picture.url }}"/>
         </a>
     {% endfor %}

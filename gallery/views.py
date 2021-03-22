@@ -23,7 +23,6 @@ def home(request):
     return render(request, 'gallery/home.html', allart)
 
 
-
 # if account is created successfully, user will be automatically logged in and redirected to home page
 def create_account(request):
     if request.method == "POST":
@@ -173,6 +172,12 @@ def artwork_edit(request, pk):
         # edit
         form = ArtworkForm(instance=artwork)
     return render(request, 'gallery/artwork_edit.html', {'form': form})
+
+
+def artwork_details(request, pk):
+    artwork = get_object_or_404(Artwork, pk=pk)
+
+    return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
 
 
 def artwork_delete(request, pk):

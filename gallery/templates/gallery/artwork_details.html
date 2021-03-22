@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'gallery/base.html' %}
+just after the  <html lang="en">
+{% load static %}
+{% block content %}
+    <head>
+    <meta charset="utf-8">
+
+    <style>
+        #blur {
+        background-image: url("{{ artwork.artwork_picture.url }}");
+        height: 100%;
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        background-size: cover;
+        z-index: -6;
+        background-position: center;
+        background-repeat: no-repeat;
+        }
+    </style>
+    </head>
+
+
+    <div class="container bcontent">
+        <div class="card" style="width: 100%; z-index: 1; position: absolute; left: 0; height: 100%; background-color: rgba(245, 245, 245, 0.4);">
+            <div class="row no-gutters" style=" margin-left: 1em; margin-right: 1em; margin-top: 18%; position: absolute; !important opacity: 1" >
+                <div class="col-sm-5">
+                    <img class="card-img" src="{{ artwork.artwork_picture.url }}" style= "border-radius: 10px 40px;" alt="Card image cap">
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body" >
+                        hello
+                        <p class="card-text">{{ artwork.artwork_title }}</p>
+                        <p class="card-text">{{ artwork.artwork_artist }}</p>
+                        <p class="card-text">{{ artwork.artwork_description }}</p>
+                        {% for tag in artwork.artwork_tag.all %}
+                            <p class="card-text">{{ tag }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    </div>
+    <!--BLUR-->
+    <div id = "blur"></div>
+    <!--END-OF-BLUR-->
+
+
+
+{% endblock %}
+</html>
