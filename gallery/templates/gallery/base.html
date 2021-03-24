@@ -22,6 +22,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+
 <script>
     $(function () {
       $('[data-toggle="popover"]').popover({ trigger: "hover" })
@@ -92,7 +93,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Account
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #3d348b;">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #3d348b; z-index: 2;">
           <a class="dropdown-item" href="{% url 'gallery:account_details' %}" style = "color: white">Account Details</a>
           <a class="dropdown-item" href="{% url 'password_change' %}" style = "color: white">Change Password</a>
           <div class="dropdown-divider"></div>

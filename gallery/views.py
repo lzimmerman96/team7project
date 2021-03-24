@@ -242,3 +242,12 @@ def collection_delete(request, pk):
     collection = get_object_or_404(Collection, pk=pk)
     collection.delete()
     return redirect('gallery:collection_list')
+
+
+def favorite(request, pk):
+    if request.GET.get('heart'):
+        fav = get_object_or_404(Favorite, created_by=request.user)
+        fav.favorite_artist = request.user
+        fav.favorite_artwork = pk
+        fav.save(update_fields=["favorite_artist", "favorite_artwork"])
+        return render(request, 'gallery/artwork_details.html')
