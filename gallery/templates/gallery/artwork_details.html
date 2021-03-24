@@ -63,7 +63,7 @@ just after the  <html lang="en">
 			background-image: -webkit-linear-gradient(top, #f4f1ee, #fff);
 			background-image: linear-gradient(top, #f4f1ee, #fff);
 			border-radius: 50%;
-			box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204,198,197,.5);
+			box-shadow: 0 8px 10px 0 rgba(0, 0, 0, .3), inset 0 4px 1px 1px white, inset 0 -3px 1px 1px rgba(204,198,197,.5);
 			float: left;
 			height: 70px;
 			margin: 0 30px 30px 0;
@@ -157,7 +157,7 @@ just after the  <html lang="en">
                         <a href="{% url 'gallery:home' %}" class="btn btn-dark" style="background-color: #f7b801">Back to Home</a>
                     <!--END-OF-BACK-BUTTON--->
                     <!--FAVORITE-->
-                    {% if user.get_username == artwork.artwork_artist|stringformat:"s" %}
+                    {% if user.is_authenticated %}
                         <a href="#" type="submit" class="button heart"></a>
                     {% endif %}
                     <!--END-OF-FAVORITE-->

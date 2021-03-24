@@ -244,10 +244,16 @@ def collection_delete(request, pk):
     return redirect('gallery:collection_list')
 
 
-def favorite(request, pk):
-    if request.GET.get('heart'):
-        fav = get_object_or_404(Favorite, created_by=request.user)
-        fav.favorite_artist = request.user
-        fav.favorite_artwork = pk
-        fav.save(update_fields=["favorite_artist", "favorite_artwork"])
-        return render(request, 'gallery/artwork_details.html')
+def favorite_new(request, pk):
+    if request.method == "POST":
+        form = FavoriteForm(request.POST, request.FILES)
+        if form.is_valid():
+            favorite = form.save(commit=False)
+            favorite.favorite_artist = request.user.artist
+            favorite.favorite_artwork = pk
+            favorite.save()
+            return redirect('gallery:home')
+    else:
+        form = FavoriteForm()
+        # print("Else")
+    return render(request, 'gallery/artwork_details.html', {'form': form})
