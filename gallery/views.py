@@ -3,7 +3,6 @@ from .models import *
 from .forms import *
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -257,3 +256,16 @@ def favorite_new(request, pk):
         form = FavoriteForm()
         # print("Else")
     return render(request, 'gallery/artwork_details.html', {'form': form})
+
+
+def search(request):
+    if request.method == 'GET':  # this will be GET now
+        title = request.GET.get('search')  # do some research what it does
+        try:
+            art = Artwork.objects.filter(
+                artwork_title__icontains=title)  # filter returns a list so you might consider skip except part
+        except Artwork.DoesNotExist:
+            art = None
+        return render(request, "gallery/home.html", {"artwork": art})
+    else:
+        return render(request, "gallery/home.html", {})

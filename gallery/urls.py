@@ -32,6 +32,7 @@ urlpatterns = [
     path('account/<int:pk>/edit', views.user_update_account_details, name='user_update_account_details'),
     path('account/<int:pk>/delete', views.user_delete_account, name='user_delete_account'),
     # path('favorite/<int:pk>/create', views.favorite_new, name='favorite_new'),
+
 ]
 
 urlpatterns += [
