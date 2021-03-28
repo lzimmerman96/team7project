@@ -41,7 +41,11 @@ class TagForm(forms.ModelForm):
 
 # for account creation
 class CreateArtistAccountForm(forms.ModelForm):
-    artist_role = forms.BooleanField(initial=True)
+    artist_role = forms.BooleanField(
+        widget=forms.HiddenInput(),
+        required=True,
+        initial=True
+    )
 
     class Meta(ArtistForm.Meta):
         model = Artist
