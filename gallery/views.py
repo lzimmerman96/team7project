@@ -204,16 +204,17 @@ def send_email(request):
         print("Error sending e-mail")
 
 
-def collection_home(request):
-    return render(request, 'gallery/collection_home.html',
-                  {'gallery': collection_home})
-
-
 def collection_list(request):
     collection = Collection.objects.all()
     return render(request, 'gallery/collection_list.html',
                   {'collections': collection})
 
+
+def collection_view(request, pk):
+    collection = get_object_or_404(Collection, pk=pk)
+    artworks = collection.artwork.all()
+    return render(request, 'gallery/collection_view.html',
+                  {'artworks': artworks})
 
 def collection_new(request):
     if request.method == "POST":

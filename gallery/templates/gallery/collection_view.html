@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'gallery/base.html' %}
+{% load static %}
+{% block content %}
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Collection view</title>
+        {#    <style>#}
+        {#        .Card {#}
+        {#        display: flex;#}
+        {#        justify-content: center;#}
+        {##}
+        {#        margin-top: 25px;#}
+        {#        width: 70vw;#}
+        {#        min-height: 26rem;#}
+        {#        }#}
+        {#        .Card-image {#}
+        {#            flex-basis: 20%;#}
+        {##}
+        {#            background-position: center;#}
+        {#            background-size: cover;#}
+        {#            background-repeat: no-repeat;#}
+        {#        }#}
+        {#        .Card-body {#}
+        {#            --margin: 2em;#}
+        {#            display: flex;#}
+        {#            flex-direction: column;#}
+        {#            justify-content: center;#}
+        {#            flex-basis: 60%;#}
+        {##}
+        {#            margin-top: var(--margin);#}
+        {#            margin-bottom: var(--margin);#}
+        {#            margin-left: -6em;#}
+        {#            padding: 0 1.4em;#}
+        {#            background-color: #fff;#}
+        {#            box-shadow: rgba(0,0,0,.2) 0 .2em .2em;#}
+        {#        }#}
+        {#        .Card-title {#}
+        {#            margin-bottom: .4em;#}
+        {#            text-transform: uppercase;#}
+        {#        }#}
+        {#        .Card-title,#}
+        {#        .Card-description { margin: 0; }#}
+        {#    </style>#}
+
+    </head>
+    <body style="min-width: 411px">
+
+
+    <!--ARTWORKS-->
+
+    <div style="top: 70px; left: 25px; position: relative">
+
+        <h1 style="color: white">My Collections</h1>
+        <!--ADD-BUTTON--->
+
+        {% for artwork in artworks %}
+            {% if request.user.is_superuser or user.get_username == artwork.artwork_artist|stringformat:"s" %}
+                <div class="Card">
+                    <div class="Card-image"><img src="media/{{ artwork.artwork_picture }}" height=400 width=400 /></div>
+                    <div class="Card-body">
+                        <h1 class="Card-title">{{ artwork.artwork_title }}</h1>
+                        {{ artwork.artwork_artist }}
+                        <hr style="border: 2px solid black; border-radius: 3px; opacity: .5; margin: 3px; margin-left: 0; position: relative">
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    </body>
+    </html>
+{% endblock %}
+</html>
