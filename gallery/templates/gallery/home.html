@@ -136,13 +136,19 @@
 <!--SIDE-MENU-->
 <div class = "sidemenu" class = "col-8" style = "background: linear-gradient(180deg, #483fa6 0%, #28225d 100%); height: 100%; z-index: 3; top: 0; position: fixed; left: 0; box-shadow: 10px 10px #28225d;" >
     <ul class="list-group " style="z-index: 4; margin-top: 90px; padding: 5px;">
-        <h2 style="color: white; text-align: center; margin: 0 0 10px; text-decoration: underline;">Links</h2>
-        <!---<a href="% url 'gallery:artist_list' %}" class="homebutton" role="button" aria-disabled="true">Artists</a>--->
-        <a href="{% url 'gallery:artwork_list' %}" class="homebutton" role="button" aria-disabled="true">My Artwork</a>
-        <a href="{% url 'gallery:collection_list' %}" class="homebutton" role="button" aria-disabled="true">My Collections</a>
-        <a href="{% url 'gallery:favorite_list' %}" class="homebutton" role="button" aria-disabled="true">My Favorites</a>
-        <a href="{% url 'gallery:tag_list' %}" class="homebutton" role="button" aria-disabled="true">Tags</a>
-        <!---<a href="% url 'gallery:rating_list' %}" class="homebutton" role="button" aria-disabled="true">Ratings</a>--->
+        {% if user.is_authenticated %}
+            <h2 style="color: white; text-align: center; margin: 0 0 10px; text-decoration: underline;">Links</h2>
+        {% endif %}
+            {% if request.user.is_superuser %}
+            <a href="% url 'gallery:artist_list' %}" class="homebutton" role="button" aria-disabled="true">Artists</a>
+            {% endif %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'gallery:artwork_list' %}" class="homebutton" role="button" aria-disabled="true">My Artwork</a>
+            <a href="{% url 'gallery:collection_list' %}" class="homebutton" role="button" aria-disabled="true">My Collections</a>
+            <a href="{% url 'gallery:favorite_list' %}" class="homebutton" role="button" aria-disabled="true">My Favorites</a>
+            <!---<a href="% url 'gallery:tag_list' %}" class="homebutton" role="button" aria-disabled="true">Tags</a>--->
+            <!---<a href="% url 'gallery:rating_list' %}" class="homebutton" role="button" aria-disabled="true">Ratings</a>--->
+        {% endif %}
     </ul>
 </div>
 <!--END-OF-SIDE-MENU-->
