@@ -265,10 +265,15 @@ def collection_delete(request, pk):
 
 def favorite_new(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
-    favorite_instance = Favorite.objects.create(favorite_artist = request.user.artist, favorite_artwork = artwork)
-    #favorite_instance.favorite_artist = request.user
+    #favorite_instance = Favorite.objects.create(favorite_artist = request.user.artist, favorite_artwork = artwork)
+    try:
+        favorite_instance = Favorite.objects.get(favorite_artist=request.user.artist, favorite_artwork=artwork)
+        favorite_instance.delete()
+    except Favorite.DoesNotExist:
+        favorite_instance = Favorite.objects.create(favorite_artist=request.user.artist, favorite_artwork=artwork)
+        favorite_instance.save()
     #favorite_instance.favorite_artwork = artwork
-    favorite_instance.save()
+
     return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
 
 
