@@ -158,7 +158,11 @@ just after the  <html lang="en">
                     <!--END-OF-BACK-BUTTON--->
                     <!--FAVORITE-->
                     {% if user.is_authenticated %}
-                        <a href="{% url 'gallery:favorite_new' pk=artwork.pk %}" class="button heart"></a>
+                        {% if request.user.is_superuser %}
+
+                        {% else %}
+                            <a href="{% url 'gallery:favorite_new' pk=artwork.pk %}" class="button heart"></a>
+                        {% endif %}
                     {% endif %}
                     <!--END-OF-FAVORITE-->
                     </div>
