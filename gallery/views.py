@@ -200,11 +200,24 @@ def send_email(request):
     except:
         print("Error sending e-mail")
 
+def collection_home(request):
+    return render(request, 'gallery/collection_home.html',
+                  {'gallery': collection_home})
 
 def collection_list(request):
     collection = Collection.objects.all()
     return render(request, 'gallery/collection_list.html',
                   {'collections': collection})
+
+def collection_artistuser(request):
+    collection_artistuser = Collection.objects.all()
+    return render(request, 'gallery/collection_home.html',
+                  {'collections_artistuser': collection_artistuser})
+
+def collection_artistuser2(request):
+    collection_artistuser2 = Collection.objects.all()
+    return render(request, 'gallery/collection_home.html',
+                  {'collections_artistuser2': collection_artistuser2})
 
 
 def collection_new(request):
