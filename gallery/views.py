@@ -1,4 +1,7 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
+
 from .models import *
 from .forms import *
 from django.utils import timezone
@@ -200,19 +203,23 @@ def send_email(request):
     except:
         print("Error sending e-mail")
 
+
 def collection_home(request):
     return render(request, 'gallery/collection_home.html',
                   {'gallery': collection_home})
+
 
 def collection_list(request):
     collection = Collection.objects.all()
     return render(request, 'gallery/collection_list.html',
                   {'collections': collection})
 
+
 def collection_artistuser(request):
     collection_artistuser = Collection.objects.all()
     return render(request, 'gallery/collection_home.html',
                   {'collections_artistuser': collection_artistuser})
+
 
 def collection_artistuser2(request):
     collection_artistuser2 = Collection.objects.all()
@@ -257,18 +264,12 @@ def collection_delete(request, pk):
 
 
 def favorite_new(request, pk):
-    if request.method == "POST":
-        form = FavoriteForm(request.POST, request.FILES)
-        if form.is_valid():
-            favorite = form.save(commit=False)
-            favorite.favorite_artist = request.user.artist
-            favorite.favorite_artwork = pk
-            favorite.save()
-            return redirect('gallery:home')
-    else:
-        form = FavoriteForm()
-        # print("Else")
-    return render(request, 'gallery/artwork_details.html', {'form': form})
+    artwork = get_object_or_404(Artwork, pk=pk)
+    favorite_instance = Favorite.objects.create(favorite_artist = request.user.artist, favorite_artwork = artwork)
+    #favorite_instance.favorite_artist = request.user
+    #favorite_instance.favorite_artwork = artwork
+    favorite_instance.save()
+    return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
 
 
 def search(request):
@@ -282,6 +283,7 @@ def search(request):
         return render(request, "gallery/home.html", {"artwork": art})
     else:
         return render(request, "gallery/home.html", {})
+
 
 def favorite_list(request):
     favorite = Favorite.objects.all()
