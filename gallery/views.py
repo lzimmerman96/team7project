@@ -216,6 +216,7 @@ def collection_view(request, pk):
     return render(request, 'gallery/collection_view.html',
                   {'artworks': artworks})
 
+
 def collection_new(request):
     if request.method == "POST":
         form = CollectionForm(request.POST, request.FILES)
