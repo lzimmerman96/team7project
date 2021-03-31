@@ -101,7 +101,8 @@
     <a href="{% url 'gallery:collection_edit' pk=collection.pk %}" class="btn btn-warning" style="width: 10em">Edit</a>
     <br style="margin: 1px; position: relative">
     <a href="{% url 'gallery:collection_delete' pk=collection.pk %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" style="width: 10em">Delete</a>
-    <a href="{% url 'gallery:collection_view' pk=collection.pk %}" class="btn btn-primary">View Collection</a>
+    <br style="margin: 1px; position: relative">
+    <a href="{% url 'gallery:collection_view' pk=collection.pk %}" class="btn btn-primary" style="width: 10em">View Collection</a>
      {% endif %}
     </div>
     </div>
