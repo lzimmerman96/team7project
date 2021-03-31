@@ -282,3 +282,8 @@ def search(request):
         return render(request, "gallery/home.html", {"artwork": art})
     else:
         return render(request, "gallery/home.html", {})
+
+def favorite_list(request):
+    favorite = Favorite.objects.all()
+    return render(request, 'gallery/favorite_list.html',
+                  {'favorites': favorite})

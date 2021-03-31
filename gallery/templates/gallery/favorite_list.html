@@ -1,10 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'gallery/base.html' %}
+{% load static %}
+{% block content %}
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Artwork List</title>
+    <style>
+        .Card {
+        display: flex;
+        justify-content: center;
 
-</body>
+        margin-top: 25px;
+        width: 70vw;
+        min-height: 26rem;
+        }
+        .Card-image {
+            flex-basis: 20%;
+
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .Card-body {
+            --margin: 2em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-basis: 60%;
+
+            margin-top: var(--margin);
+            margin-bottom: var(--margin);
+            margin-left: -6em;
+            padding: 0 1.4em;
+            background-color: #fff;
+            box-shadow: rgba(0,0,0,.2) 0 .2em .2em;
+        }
+        .Card-title {
+            margin-bottom: .4em;
+            text-transform: uppercase;
+        }
+        .Card-title,
+        .Card-description { margin: 0; }
+    </style>
+
+    </head>
+    <body style="min-width: 411px">
+
+
+    <!--ARTWORKS-->
+
+    <div style="top: 70px; left: 25px; position: relative">
+
+    <h1 style="color: white">My Favorite Artwork</h1>
+
+    {% for favorite in favorites %}
+    {% if request.user.is_superuser or user.get_username == favorite.favorite_artist|stringformat:"s" %}
+    <div class="Card">
+		<div class="Card-image"><img src="media/{{ favorite.favorite_artwork.artwork_picture }}" height=400 width=400 /></div>
+		<div class="Card-body">
+				<h1 class="Card-title">{{ favorite.favorite_artwork.artwork_title }}</h1>
+				<p class="Card-description">
+                    <br>
+                    {{ favorite.favorite_artist }}
+                    <hr style="border: 2px solid black; border-radius: 3px; opacity: .5; margin: 3px; margin-left: 0; position: relative">
+                    <!---TAG-LIST--->
+                    Tags:
+                    {% for tag in favorite.favorite_artwork.artwork_tag.all %}
+                        {{ tag }},
+                    {% endfor %}
+                    <!---END-OF-TAG-LIST--->
+				</p>
+            {% if request.user.is_superuser or user.get_username == favorite.favorite_artist|stringformat:"s" %}
+            <br style="margin: 1px; position: relative">
+                <a href="{% url 'gallery:artwork_delete' pk=favorite.pk %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" style="width: 10em">Delete</a>
+            {% endif %}
+		</div>
+	</div>
+    {% endif %}
+    {% endfor %}
+    <!--END-OF-ARTWORKS-->
+
+    </div>
+
+    </body>
+    </html>
+{% endblock %}
+
+
 </html>
