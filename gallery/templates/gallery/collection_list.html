@@ -74,125 +74,43 @@
         </style>
 
     </head>
-    {#    <body style="min-width: 411px">#}
+
+    <body style="min-width: 411px">
 
 
     <!--COLLECTIONS-->
-    {##}
-    {#    <div style="top: 70px; position: relative">#}
-    {##}
-    {#    <h1 style="color: white; left: 25px; position: relative">My Collections</h1>#}
-    {#    <!--ADD-BUTTON--->#}
-    {#    <a href="{% url 'gallery:collection_new' %}" class="btn btn-dark" style="background-color: #f7b801; left: 25px; margin-top: 10px; position: relative">Add Collection</a>#}
-    {#    <!--END-OF-ADD-BUTTON--->#}
-    {#    {% for collection in collections %}#}
-    {#    {% if request.user.is_superuser or user.get_username == collection.collection_artist|stringformat:"s" %}#}
-    {#    <div class="Card">#}
-    {##}
-    {#		<div class="Card-body">#}
-    {#				<h1 class="Card-title">{{ collection.collection_name }}</h1>#}
-    {#				<p class="Card-description">#}
-    {#					{{ collection.collection_description }}#}
-    {#                    <br>#}
-    {#                    {{ collection.collection_artist }}#}
-    {#                    <hr style="border: 2px solid black; border-radius: 3px; opacity: .5; margin: 3px; margin-left: 0; position: relative">#}
-    {#				</p>#}
-    {#            {% if request.user.is_superuser or user.get_username == collection.collection_artist|stringformat:"s" %}#}
-    {#                <a href="{% url 'gallery:collection_edit' pk=collection.pk %}" class="btn btn-warning" style="width: 10em">Edit</a>#}
-    {#            <br style="margin: 1px; position: relative">#}
-    {#                <a href="{% url 'gallery:collection_delete' pk=collection.pk %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" style="width: 10em">Delete</a>#}
-    {#            {% endif %}#}
-    {#		</div>#}
-    {#	</div>#}
-    {#    {% endif %}#}
-    {#    {% endfor %}#}
+
+
+    <div style="top: 70px; position: relative">
+
+    <h1 style="color: white; left: 25px; position: relative">My Collections</h1>
+    <!--ADD-BUTTON--->
+    <a href="{% url 'gallery:collection_new' %}" class="btn btn-dark" style="background-color: #f7b801; left: 25px; margin-top: 10px; position: relative">Add Collection</a>
+    <!--END-OF-ADD-BUTTON--->
+    {% for collection in collections %}
+    {% if request.user.is_superuser or user.get_username == collection.collection_artist|stringformat:"s" %}
+    <div class="Card">
+    <div class="Card-body">
+    <h1 class="Card-title">{{ collection.collection_name }}</h1>
+    <p class="Card-description">
+    {{ collection.collection_description }}
+    <br>
+    {{ collection.collection_artist }}
+    <hr style="border: 2px solid black; border-radius: 3px; opacity: .5; margin: 3px; margin-left: 0; position: relative"></p>
+     {% if request.user.is_superuser or user.get_username == collection.collection_artist|stringformat:"s" %}
+    <a href="{% url 'gallery:collection_edit' pk=collection.pk %}" class="btn btn-warning" style="width: 10em">Edit</a>
+    <br style="margin: 1px; position: relative">
+    <a href="{% url 'gallery:collection_delete' pk=collection.pk %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" style="width: 10em">Delete</a>
+    {% endif %}
+    </div>
+    </div>
+    {% endif %}
+    {% endfor %}
     <!--END-OF-ARTWORKS-->
-    {#    </div>#}
-    {#        </body>#}
-    {#    </html>#}
-    {#{% endblock %}#}
-    {#</html>#}
-    <!--COLLECTIONS-->
-
-    <body id="app-layout">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#myNavbar">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="/">
-                    Maverick Food Service
-                </a>
-            </div>
-{#            <div class="collapse navbar-collapse" id="myNavbar">#}
-{#                <ul class="nav navbar-nav">#}
-{#                    <li><a href="{% url 'gallery:collection_home' %}">Home</a></li>#}
-{#                </ul>#}
-{#                <ul class="nav navbar-nav navbar-right">#}
-{#                    {% if user.is_authenticated %}#}
-{#                        <li class="dropdown">#}
-{#                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">#}
-{#                                <span class="caret"></span>#}
-{#                            </a>#}
-{#                            <ul class="dropdown-menu" role="menu">#}
-{#                                <li><a href="{% url 'password_change' %}"><i class="fa fa-btn fa-sign-out"></i>Change Password</a></li>#}
-{#                                <li><a href="{% url 'logout' %}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>#}
-{#                            </ul>#}
-{#                        </li>#}
-{#                    {% else %}#}
-{#                        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>#}
-{#                    {% endif %}#}
-{#                </ul>#}
-{#            </div>#}
-        </div>
-    </nav>
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="links">
-                    <!-- Example row of columns -->
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <img src="{% static "images/artist.jpg" %}" alt="customer"/>
-                                <div class="caption">
-                                    <h2>Artistuser</h2>
-                                    <p>Collection of artist user </p>
-                                    {% if user.is_authenticated %}
-                                        <p><a class="btn btn-default" href="{% url 'gallery:collection_artistuser' %}"
-                                              role="button">View
-                                            details &raquo;</a></p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <img src="{% static "images/artistbg.jpg" %}" alt="cupcakes"/>
-                                <div class="caption">
-                                    <h2>Artistuser2</h2>
-                                    <p>Our food and services are second to none.</p>
-                                    <p><a class="btn btn-default" href="{% url 'gallery:collection_artistuser2' %}"
-                                          role="button">View
-                                        details &raquo;</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+    </div>
     </body>
-{% endblock %}
-</html>
+    </html>
+    {% endblock %}
+    </html>
+
+

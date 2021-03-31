@@ -215,18 +215,6 @@ def collection_list(request):
                   {'collections': collection})
 
 
-def collection_artistuser(request):
-    collection_artistuser = Collection.objects.all()
-    return render(request, 'gallery/collection_home.html',
-                  {'collections_artistuser': collection_artistuser})
-
-
-def collection_artistuser2(request):
-    collection_artistuser2 = Collection.objects.all()
-    return render(request, 'gallery/collection_home.html',
-                  {'collections_artistuser2': collection_artistuser2})
-
-
 def collection_new(request):
     if request.method == "POST":
         form = CollectionForm(request.POST, request.FILES)
@@ -234,6 +222,7 @@ def collection_new(request):
             collection = form.save(commit=False)
             collection.created_date = timezone.now()
             collection.save()
+            form.save_m2m()
             return redirect('gallery:collection_list')
     else:
         form = CollectionForm()
@@ -250,6 +239,7 @@ def collection_edit(request, pk):
             collection = form.save(commit=False)
             collection.updated_date = timezone.now()
             collection.save()
+            form.save_m2m()
             return redirect('gallery:collection_list')
     else:
         # edit
@@ -265,14 +255,14 @@ def collection_delete(request, pk):
 
 def favorite_new(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
-    #favorite_instance = Favorite.objects.create(favorite_artist = request.user.artist, favorite_artwork = artwork)
+    # favorite_instance = Favorite.objects.create(favorite_artist = request.user.artist, favorite_artwork = artwork)
     try:
         favorite_instance = Favorite.objects.get(favorite_artist=request.user.artist, favorite_artwork=artwork)
         favorite_instance.delete()
     except Favorite.DoesNotExist:
         favorite_instance = Favorite.objects.create(favorite_artist=request.user.artist, favorite_artwork=artwork)
         favorite_instance.save()
-    #favorite_instance.favorite_artwork = artwork
+    # favorite_instance.favorite_artwork = artwork
 
     return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
 

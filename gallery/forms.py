@@ -18,7 +18,9 @@ class ArtworkForm(forms.ModelForm):
 class CollectionForm(forms.ModelForm):
     class Meta:
         model = Collection
-        fields = ('collection_name', 'collection_description', 'collection_artist', 'artwork')
+        artwork = forms.ModelMultipleChoiceField(queryset=Artwork.objects.all())
+        fields = ('collection_name', 'collection_artist', 'collection_description', 'artwork')
+
 
 
 class FavoriteForm(forms.ModelForm):
