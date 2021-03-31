@@ -126,6 +126,10 @@
         <h2 style = "color: black; z-index: 1; position: relative" >Hello {{ user.username }},</h2>
         <p style = "color: black;  z-index: 1; position: relative">Welcome to the Drawing Board!</p>
             <p style = "color: black; z-index: 1; position: relative" >You can submit and manage your artwork here.</p>
+        {% else %}
+        <h2 style = "color: black; z-index: 1; position: relative" >Hello Viewer,</h2>
+        <p style = "color: black;  z-index: 1; position: relative">Welcome to the Drawing Board!</p>
+        <p style = "color: black; z-index: 1; position: relative" >There are many pieces of artwork you can view.</p>
         {% endif %}
     </div>
 <div class="sea"></div>
