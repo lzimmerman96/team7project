@@ -169,6 +169,7 @@ def artwork_edit(request, pk):
             artwork = form.save(commit=False)
             artwork.updated_date = timezone.now()
             artwork.save()
+            form.save_m2m()
             return redirect('gallery:artwork_list')
     else:
         # edit
