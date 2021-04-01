@@ -214,8 +214,10 @@ def collection_list(request):
 def collection_view(request, pk):
     collection = get_object_or_404(Collection, pk=pk)
     artworks = collection.artwork.all()
+    artist = collection.collection_artist
+    print(collection.collection_name)
     return render(request, 'gallery/collection_view.html',
-                  {'artworks': artworks})
+                  {'artworks': artworks,'collection':collection,'artist':artist})
 
 
 def collection_new(request):
