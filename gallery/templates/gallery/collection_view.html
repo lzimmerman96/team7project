@@ -12,13 +12,14 @@
             .title {
                 position: relative;
                 color: white;
+                line-height: 3;
             }
 
             .artistpic {
                 vertical-align: middle;
                 width: 150px;
                 height: 150px;
-                border-radius: 50%;
+                border-radius: 30%;
                 position: center;
                 margin: auto;
                 display: block;
@@ -26,9 +27,9 @@
 
             .display-image {
                 float: left;
-                margin-top: 100px;
-                min-height: 100rem;
-                padding-left: 2em;
+                margin-top: 50px;
+                min-height: 50rem;
+                padding-left: 3em;
                 padding-right: 2em;
             }
 
@@ -42,26 +43,27 @@
 
         </style>
     </head>
-    <body style="min-width: 411px">
-    <div class="container" style="top: 50px; position: relative">
-        <table class="row justify-content-center">
-            <tr>
-                <td>
-                    <h1 class="title text-center">{{ collection.collection_name }}</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="{% get_media_prefix %}{{ artist.profile_picture }}" class="artistpic">
-                </td>
-            </tr>
-        </table>
-    </div>
+    <body>
+    <table>
+        <div class="container" style="top: 100px; position: relative">
+            <table class="row justify-content-center">
+                <tr>
+                    <td>
+                        <h1 class="title text-center">{{ collection.collection_name }}</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{% get_media_prefix %}{{ artist.profile_picture }}" class="artistpic">
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-    {% for artwork in artworks %}
+        {% for artwork in artworks %}
             <div class="display-image">
                 <table>
-                    <tr align="center" bgcolor="#eeeeee">
+                    <tr>
                         <td>
                             <img src="{% get_media_prefix %}{{ artwork.artwork_picture }}" height=400 width=400/>
                         </td>
@@ -74,7 +76,8 @@
                     </tr>
                 </table>
             </div>
-    {% endfor %}
+        {% endfor %}
+    </table>
     </body>
     </html>
 {% endblock %}
