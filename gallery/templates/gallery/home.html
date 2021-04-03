@@ -155,6 +155,15 @@
             {% endif %}
             <!---<a href="% url 'gallery:tag_list' %}" class="homebutton" role="button" aria-disabled="true">Tags</a>--->
             <!---<a href="% url 'gallery:rating_list' %}" class="homebutton" role="button" aria-disabled="true">Ratings</a>--->
+            {% else %}
+
+                <h2 style="color: white; text-align: center; margin: 0 0 10px; text-decoration: underline; margin-top: 25px; margin-bottom: 25px">DrawingBoard</h2>
+                <p style="text-align: center; color: white">Welcome!</p>
+                <p style="text-align: center; color: white">We are a site made for people</p>
+                <p style="text-align: center; color: white">to submit their own art</p>
+                <p style="text-align: center; color: white">and even check out others.</p>
+                 <hr style="border: 1px solid white; border-radius: 5px; width: 70%; position: relative">
+                <a href="{% url 'gallery:create_account' %}" class="homebutton" role="button" aria-disabled="true">New Account</a>
         {% endif %}
     </ul>
 </div>
