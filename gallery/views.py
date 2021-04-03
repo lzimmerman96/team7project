@@ -179,8 +179,11 @@ def artwork_edit(request, pk):
 
 def artwork_details(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
-
-    return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
+    try:
+        favorite = Favorite.objects.get(favorite_artist=request.user.artist, favorite_artwork=artwork)
+        return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'status': 'button heart red'})
+    except Favorite.DoesNotExist:
+        return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'status': ''})
 
 
 def artwork_delete(request, pk):
@@ -217,7 +220,7 @@ def collection_view(request, pk):
     artist = collection.collection_artist
     print(collection.collection_name)
     return render(request, 'gallery/collection_view.html',
-                  {'artworks': artworks,'collection':collection,'artist':artist})
+                  {'artworks': artworks, 'collection': collection, 'artist': artist})
 
 
 def collection_new(request):
@@ -269,7 +272,8 @@ def favorite_new(request, pk):
         favorite_instance.save()
     # favorite_instance.favorite_artwork = artwork
 
-    return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
+    # return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
+    return redirect('gallery:home')
 
 
 def search(request):

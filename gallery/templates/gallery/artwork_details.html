@@ -109,8 +109,8 @@ just after the  <html lang="en">
         $(document).ready(function(){
           $(".heart").click(function(){
             $(this).toggleClass("red");
-
           });
+
         });
 
     </script>
@@ -147,6 +147,7 @@ just after the  <html lang="en">
                         <p >{{ artwork.artwork_description }}</p>
 
                     <!---TAG-LIST--->
+
                         <p style="font-size: medium">Tags: </p>
                         {% for tag in artwork.artwork_tag.all %}
                             <li style="display:inline;">{{ tag }}, </li>
@@ -159,12 +160,13 @@ just after the  <html lang="en">
                     <!--FAVORITE-->
                     {% if user.is_authenticated %}
                         {% if request.user.is_superuser %}
-
                         {% else %}
-                            <a href="{% url 'gallery:favorite_new' pk=artwork.pk %}" class="button heart"></a>
+                            <a href="{% url 'gallery:favorite_new' pk=artwork.pk %}" class="button heart {{ status }}"></a>
+
                         {% endif %}
                     {% endif %}
                     <!--END-OF-FAVORITE-->
+
                     </div>
                 </div>
             </div>
