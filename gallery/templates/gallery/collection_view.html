@@ -19,65 +19,51 @@
                 vertical-align: middle;
                 width: 150px;
                 height: 150px;
-                border-radius: 30%;
+                border-radius: 50%;
                 position: center;
                 margin: auto;
                 display: block;
+                object-fit: cover;
             }
 
-            .display-image {
-                float: left;
-                margin-top: 50px;
-                min-height: 50rem;
-                padding-left: 3em;
-                padding-right: 2em;
-            }
-
-            .art-title {
-                color: white;
-            }
-
-            .artist-title {
-                color: white;
-            }
 
         </style>
     </head>
     <body>
-    <table>
-        <div class="container" style="top: 100px; position: relative">
-            <table class="row justify-content-center">
-                <tr>
-                    <td>
-                        <h1 class="title text-center">{{ collection.collection_name }}</h1>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="{% get_media_prefix %}{{ artist.profile_picture }}" class="artistpic">
-                    </td>
-                </tr>
-            </table>
-        </div>
 
-        {% for artwork in artworks %}
-            <div class="display-image">
-                <table>
-                    <tr>
-                        <td>
-                            <img src="{% get_media_prefix %}{{ artwork.artwork_picture }}" height=400 width=400/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3 class="art-title">{{ artwork.artwork_title }}</h3>
-                            <h4 class="artist-title">{{ artwork.artwork_artist }}</h4>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        {% endfor %}
-    </table>
+    <div class="container" style="top: 15px; position: relative; margin-bottom: 50px">
+        <table class="row justify-content-center">
+            <tr>
+                <td>
+                    <h1 class="title text-center" style="top: 25px; position: relative">{{ collection.collection_name }}</h1>
+                    <hr style="border: 2px solid white; border-radius: 5px; top: -10px; opacity: .5; width: 70%; position: relative">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="{% get_media_prefix %}{{ artist.profile_picture }}" class="artistpic">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!---COLLECTION-ART--->
+      <div class="card-columns" style="position: relative; top: 25px">
+      {% for artwork in artworks %}
+      <a href="{% url 'gallery:artwork_details' pk=artwork.pk %}">
+      <div class="card" style="background-color: black">
+        <img src="{% get_media_prefix %}{{ artwork.artwork_picture }}" class="card-img-top" alt="...">
+        <div class="card-body" style="color: white">
+          <h5 class="card-title">{{ artwork.artwork_title }}</h5>
+          <p class="card-text">{{ artwork.artwork_artist }}</p>
+          <p class="card-text">{{ artwork.description }}</p>
+        </div>
+      </div>
+      </a>
+      {% endfor %}
+      </div>
+    <!---END-OF-COLLECTION-ART--->
+
     </body>
     </html>
 {% endblock %}
