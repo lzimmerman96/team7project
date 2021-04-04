@@ -57,16 +57,17 @@
             {% for artwork in artworks %}
                 <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                     <figure>
-                        <a class="d-block mb-4" data-fancybox="images"
+                        <a data-fancybox="images"
                            href="{% get_media_prefix %}{{ artwork.artwork_picture }}"
                            data-caption="{{ artwork.artwork_title }}">
                             <img class="img-fluid" src="{% get_media_prefix %}{{ artwork.artwork_picture }}"/>
                         </a>
-                        <figcaption class="card-body" style="color: white">
-                            <h5 class="card-title">{{ artwork.artwork_title }}</h5>
-                            <p class="card-text">{{ artwork.artwork_artist }}</p>
-                            <p class="card-text">{{ artwork.artwork_description }}</p>
+                        <figcaption class="card-body" style="color: white; display: none">
+                            <h2 class="card-title">{{ artwork.artwork_title }}</h2>
+                            <h4 class="card-text">{{ artwork.artwork_artist }}</h4>
+                            <h5 class="card-text">{{ artwork.artwork_description }}</h5>
                         </figcaption>
+                        <p><h4 style="color: white">{{ artwork.artwork_title }}</h4></p>
                     </figure>
                 </div>
             {% endfor %}
@@ -82,7 +83,7 @@
             buttons: ["zoom", "share", "slideShow", "fullScreen", "download", "thumbs", "close"],
             thumbs: {
                 autoStart: true
-            }
+            },
         });
 
         // Shortcut to apply options to image gallery
