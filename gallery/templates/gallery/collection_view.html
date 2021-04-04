@@ -67,10 +67,10 @@
             </tr>
         </table>
     </div>
-    <div class="container page-top col-lg-12">
+    <div class="container page-top col-lg-12 col-md-12">
         <div class="row">
             {% for artwork in artworks %}
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div class="col-lg-3 col-md-3 col-xs-6 thumb">
                     <figure>
                         <a data-fancybox="images"
                            href="{% get_media_prefix %}{{ artwork.artwork_picture }}"
