@@ -184,7 +184,8 @@ def artwork_details(request, pk):
         return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'status': 'button heart red'})
     except Favorite.DoesNotExist:
         return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'status': ''})
-
+    except:
+        return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
 
 def artwork_delete(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
