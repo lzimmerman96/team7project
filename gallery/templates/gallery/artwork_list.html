@@ -17,12 +17,12 @@
                 -ms-transition: all .3s ease-in-out;
             }
 
-            .pic-size{
+            .pic-size {
                 width: 400px;
                 height: 400px;
                 object-fit: cover;
             }
-            
+
             .transition {
                 -webkit-transform: scale(1.05);
                 -moz-transform: scale(1.05);
@@ -43,12 +43,12 @@
 
         <h1 style="color: white; left: 25px; position: relative">Save Your Paintings</h1>
         <!--ADD-BUTTON--->
-        <a href="{% url 'gallery:artwork_new' %}" class="btn btn-dark" style="background-color: #f7b801; margin-left: 30px; position:relative;">Add Artwork</a>
+        <a href="{% url 'gallery:artwork_new' %}" class="btn btn-dark"
+           style="background-color: #f7b801; margin-left: 30px; position:relative;">Add Artwork</a>
         <br><br>
         <!--END-OF-ADD-BUTTON--->
         <div class="container page-top col-lg-12 col-md-12">
             <div class="row">
-
                 {% for artwork in artworks %}
                     {% if request.user.is_superuser or user.get_username == artwork.artwork_artist|stringformat:"s" %}
                         <div class="col-lg-3 col-md-3 col-xs-6 thumb">
@@ -67,13 +67,18 @@
                                         <h4>{{ tag }}</h4>
                                     {% endfor %}
                                 </figcaption>
-                                <p><h4 style="color: white">{{ artwork.artwork_title }}</h4></p>
-                                {% if request.user.is_superuser or user.get_username == artwork.artwork_artist|stringformat:"s" %}
-                                    <a href="{% url 'gallery:artwork_edit' pk=artwork.pk %}">Edit</a>
-                                    <br style="margin: 1px; position: relative">
-                                    <a href="{% url 'gallery:artwork_delete' pk=artwork.pk %}" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
-                                {% endif %}
                             </figure>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td><h4 style="color: white">{{ artwork.artwork_title }}</h4></td>
+                                    {% if request.user.is_superuser or user.get_username == artwork.artwork_artist|stringformat:"s" %}
+                                        <td><a href="{% url 'gallery:artwork_edit' pk=artwork.pk %}">Edit</a></td>
+                                        <td><a href="{% url 'gallery:artwork_delete' pk=artwork.pk %}"
+                                               onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            </table>
                         </div>
                     {% endif %}
                 {% endfor %}
