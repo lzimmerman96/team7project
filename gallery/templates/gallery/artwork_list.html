@@ -17,6 +17,12 @@
                 -ms-transition: all .3s ease-in-out;
             }
 
+            .pic-size{
+                width: 400px;
+                height: 400px;
+                object-fit: cover;
+            }
+            
             .transition {
                 -webkit-transform: scale(1.05);
                 -moz-transform: scale(1.05);
@@ -50,7 +56,7 @@
                                 <a data-fancybox="images"
                                    href="media/{{ artwork.artwork_picture }}"
                                    data-caption="{{ artwork.artwork_title }}">
-                                    <img class="img-fluid zoom" src="media/{{ artwork.artwork_picture }}"/>
+                                    <img class="img-fluid pic-size zoom" src="media/{{ artwork.artwork_picture }}"/>
                                 </a>
                                 <figcaption class="card-body" style="color: white; display: none">
                                     <h1 class="card-title">{{ artwork.artwork_title }}</h1>
