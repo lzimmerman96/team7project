@@ -82,7 +82,7 @@
                            href="{% get_media_prefix %}{{ artwork.artwork_picture }}"
                            data-caption="{{ artwork.artwork_title }}">
                             <!-- Transition logic to zoom the thumbnail - https://bootsnipp.com/snippets/aMGnk -->
-                            <img class="img-fluid pic-size zoom" src="{% get_media_prefix %}{{ artwork.artwork_picture }}"/>
+                            <img class="img-fluid pic-size zoom" style= "border-radius: 10px 40px;" src="{% get_media_prefix %}{{ artwork.artwork_picture }}"/>
                         </a>
                         <figcaption class="card-body" style="color: white; display: none">
                             <h2 class="card-title">{{ artwork.artwork_title }}</h2>

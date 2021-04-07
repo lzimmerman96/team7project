@@ -45,9 +45,9 @@
     </head>
     <body style="min-width: 411px">
     <div style="top: 70px; left:25px; position: relative">
-        <h1 style="color: white">New Artist</h1>
+        <h1 style="color: white">Artist List</h1>
         <!--ADD-BUTTON--->
-        <a href="{% url 'gallery:artist_new' %}" class="btn btn-dark" style="background-color: #f7b801; margin-top: 10px; position: relative">Add Info</a>
+        <a href="{% url 'gallery:artist_new' %}" class="btn btn-dark" style="background-color: #f7b801; margin-top: 10px; position: relative">Add Artist</a>
 
         {% for artist in artists %}
             <div class="Card">
