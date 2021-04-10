@@ -19,21 +19,22 @@
             .loginbox{
                 width: 320px;
                 height: 420px;
-                background: yellowgreen;
+                background: #483fa6;
                 color: #fff;
                 top: 50%;
                 left: 50%;
+                border-radius: 4px;
+                padding: 20px;
                 position: absolute;
-                transform: translate(-10%,50%);
+                transform: translate(-50%,-50%);
                 box-sizing: border-box;
             }
 
             .logo{
                 width: 125px;
                 height: 125px;
-                border-radius: 50%;
                 position: absolute;
-                top: 0px;
+                top: 0;
                 left: calc(50% - 50px);
             }
 
@@ -86,7 +87,7 @@
     </head>
     <body>
     <div class = "loginbox">
-        <img src="{% static "images/loginlogo.png" %}" alt="login logo"class = "logo"/>
+        <img src="{% static "images/whitelogo.png" %}" alt="login logo"class = "logo"/>
             <h1>Welcomes you!</h1>
             <h2>Login here</h2>
             {% if form.errors %}
