@@ -105,14 +105,14 @@
 
 <!--SEARCH-->
 <div style = "background-color: #ffd004; height: 400px; z-index: -2;  margin-top: -100px;">
-    <form style="z-index: 0; position: absolute; top: 130px; right: 1em; margin-bottom: 10px" class="col-4">
+    <form action="{% url 'gallery:search_results' %}" method="get" style="z-index: 0; position: absolute; top: 130px; right: 1em; margin-bottom: 10px" class="col-4">
       <div class="form-row" >
         <div class="col-12">
           <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search here..." aria-label="Search">
         </div>
 
         <div class="col" style="margin-top: 10px;">
-          <a href="#" class="btn btn-dark" style="background-color: #28225d">Search</a>
+          <button type="submit" class="btn btn-dark" style="background-color: #28225d" name="button">Search</button>
         </div>
       </div>
 
