@@ -9,6 +9,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
 from django.core.mail import send_mail
+from django.db.models import Q
 
 now = timezone.now()
 
@@ -187,6 +188,7 @@ def artwork_details(request, pk):
     except:
         return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
 
+
 def artwork_delete(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
     artwork.delete()
@@ -276,17 +278,18 @@ def favorite_new(request, pk):
     return redirect('gallery:home')
 
 
-def search(request):
-    if request.method == 'GET':  # this will be GET now
-        title = request.GET.get('search')  # do some research what it does
+def search_results(request):
+    query = request.GET.get('q')
+    if query:
         try:
-            art = Artwork.objects.filter(
-                artwork_title__icontains=title)  # filter returns a list so you might consider skip except part
+            object_list = Artwork.objects.filter(
+                Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query)
+            )
         except Artwork.DoesNotExist:
-            art = None
-        return render(request, "gallery/home.html", {"artwork": art})
+            object_list = None
+        return render(request, 'gallery/search_results.html', {'object_list': object_list})
     else:
-        return render(request, "gallery/home.html", {})
+        return render(request, 'gallery/home.html')
 
 
 def favorite_list(request):

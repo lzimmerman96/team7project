@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "gallery/base.html" %}
+{% block content %}
+
+    <h1>Search results: </h1>
+
+    {% for art in object_list %}
+        <h1>{{ art.artwork_title }}</h1>
+        <img src="{{ art.artwork_picture.url }}"/>
+    {% endfor %}
+
+
+{% endblock %}
+
+</html>
