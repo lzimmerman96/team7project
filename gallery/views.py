@@ -105,6 +105,13 @@ def artist_list(request):
                   {'artists': artist})
 
 
+def artist_view(request, pk):
+    artist = get_object_or_404(Artist, pk=pk)
+    artworks = Artwork.objects.filter(artwork_artist=artist)
+    context = {'artist': artist, 'artworks': artworks}
+    return render(request, 'gallery/artist_view.html', context)
+
+
 def artist_new(request):
     if request.method == "POST":
         form = ArtistForm(request.POST, request.FILES)
