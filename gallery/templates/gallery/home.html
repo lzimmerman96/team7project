@@ -168,6 +168,7 @@
             {% if user.is_authenticated %}
                {% else %}
                <a href="{% url 'gallery:artist_list' %}" class="homebutton" role="button" aria-disabled="true">All Artists</a>
+
             {% endif %}
         {% endif %}
     </ul>

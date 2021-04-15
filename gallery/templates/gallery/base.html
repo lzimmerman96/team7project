@@ -87,8 +87,8 @@
       <li class="nav-item active"> <a class="nav-link" href="{% url 'gallery:home' %}">Home <span class="sr-only">(current)</span></a> </li>
       {% if user.is_authenticated %}
       <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:artist_list' %}">Artist List</a> </li>
-      <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:artwork_list' %}">Artwork List</a> </li>
-      <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:collection_list' %}">Collection List</a> </li>
+      <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:artwork_list' %}">{% if request.user.is_superuser %}All Artwork{% else %} My Artwork {% endif %}</a> </li>
+      <li class="nav-item"> <a class="nav-link" href="{% url 'gallery:collection_list' %}">{% if request.user.is_superuser %}All Collections{% else %} My Collections {% endif %}</a> </li>
       {% endif %}
     <!---RIGHT-NAVBAR--->
     {% if user.is_authenticated %}
