@@ -4,7 +4,7 @@ just after the  <html lang="en">
 {% load static %}
 {% block content %}
     <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
         <style type="text/css">
             body{
                 margin: 0;
@@ -14,12 +14,37 @@ just after the  <html lang="en">
                 background-postion: center;
                 font-family: sans-serif;
             }
+            .editbox{
+                width: 600px;
+                height: 700px;
+                background: #483fa6;
+                color: #fff;
+                top: 50%;
+                left: 50%;
+                border-radius: 4px;
+                padding: 20px;
+                position: absolute;
+                transform: translate(-50%,-50%);
+                box-sizing: border-box;
+            }
+
+            .edit-form{
+                border : none;
+                margin-bottom:20px;
+                height: 40px;
+                color: black;
+                font-size: 16px;
+            }
         </style>
     </head>
-    <h1>Edit Artwork</h1>
-    <form method="POST" enctype="multipart/form-data" class="artwork-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Update</button>
-    </form>
+    <div class = "editbox">
+        <h1>Edit Artwork</h1>
+        <div class = "edit-form">
+            <form method="POST" enctype="multipart/form-data" class="artwork-form">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="save btn btn-default">Update</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
 </html>
