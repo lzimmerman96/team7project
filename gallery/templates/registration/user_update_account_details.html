@@ -14,16 +14,13 @@
                 font-family: sans-serif;
             }
         </style>
-   </head>
+    </head>
     <h2>Edit Account Details</h2>
-
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            <br>
-
-            <button type="submit" name="submit">Update</button>
-            <a href="{% url 'gallery:account_details' %}">Cancel</a> {# want css to make this look like a button #}
-        </form>
-
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <br>
+        <button type="submit" name="submit">Update</button>
+        <a href="{% url 'gallery:account_details' %}">Cancel</a> {# want css to make this look like a button #}
+    </form>
 {% endblock %}

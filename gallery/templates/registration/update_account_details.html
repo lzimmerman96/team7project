@@ -5,27 +5,41 @@
 {% block content %}
     <head>
         <style type="text/css">
-            body{
-                margin: 0;
-                padding: 0;
-                background: url('{% static "images/account.jpg" %}');
-                background-size: cover;
-                background-postion: center;
-                font-family: sans-serif;
+            .updatebox{
+                width: 600px;
+                height: 500px;
+                background: #483fa6;
+                color: #fff;
+                top: 50%;
+                left: 50%;
+                border-radius: 4px;
+                padding: 20px;
+                position: absolute;
+                transform: translate(-50%,-50%);
+                box-sizing: border-box;
+            }
+
+            .update-form{
+                border : none;
+                margin-bottom:20px;
+                height: 40px;
+                color: black;
+                font-size: 16px;
             }
         </style>
-   </head>
-    <h2>Edit Account Details</h2>
-
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            <br>
-            <br>
-            {{ artist_form.as_p }}
-
-            <button type="submit" name="submit">Update</button>
+    </head>
+    <div class = "updatebox">
+        <h2>Edit Account Details</h2>
+        <div class = "update-form">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                <br>
+                <br>
+                {{ artist_form.as_p }}
+                <button type="submit" name="submit">Update</button>
                 <a href="{% url 'gallery:account_details' %}">Cancel</a> {# want css to make this look like a button #}
-        </form>
-
+            </form>
+        </div>
+    </div>
 {% endblock %}
