@@ -290,7 +290,8 @@ def search_results(request):
     if query:
         try:
             object_list = Artwork.objects.filter(
-                Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query)
+                Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query) |
+                Q(artwork_tag__tag_name__icontains=query)
             )
         except Artwork.DoesNotExist:
             object_list = None
