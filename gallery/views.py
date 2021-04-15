@@ -295,7 +295,7 @@ def search_results(request):
             )
         except Artwork.DoesNotExist:
             object_list = None
-        return render(request, 'gallery/search_results.html', {'object_list': object_list})
+        return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query})
     else:
         return render(request, 'gallery/home.html')
 
