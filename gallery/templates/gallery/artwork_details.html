@@ -142,9 +142,9 @@ just after the  <html lang="en">
                     </div>
                     <!---END-OF-RATING--->
 
-                        <p  style="font-weight: bold; font-size: xx-large">{{ artwork.artwork_title }}</p>
-                        <p  style="font-size: large">Artist: {{ artwork.artwork_artist }}</p>
-                        <p >{{ artwork.artwork_description }}</p>
+                        <p style="font-weight: bold; font-size: xx-large">{{ artwork.artwork_title }}</p>
+                        <a style="color: #f7b801" href="{% url 'gallery:artist_view' pk=artwork.artwork_artist.pk %}"><p style="font-size: large">Artist: {{ artwork.artwork_artist }}</p></a>
+                        <p>{{ artwork.artwork_description }}</p>
 
                     <!---TAG-LIST--->
 
@@ -162,7 +162,6 @@ just after the  <html lang="en">
                         {% if request.user.is_superuser %}
                         {% else %}
                             <a href="{% url 'gallery:favorite_new' pk=artwork.pk %}" class="button heart {{ status }}"></a>
-
                         {% endif %}
                     {% endif %}
                     <!--END-OF-FAVORITE-->

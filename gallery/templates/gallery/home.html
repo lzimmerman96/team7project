@@ -179,7 +179,15 @@
 <!--we can replace with a search query instead of all artwork being displayed-->
 <!--Author.objects.filter(name__contains='Terry')-->
 <div style=" margin-top: 2em; margin-left: 190px; left: 25px;position: absolute;  overflow: auto; height: 100vm;" >
+    {% if query is not null %}
+    <h4 style="color: white; left: 3px; position: relative">Results for "{{ query }}"</h4>
+        {% else %}
+    <h4 style="color: white; left: 3px; position: relative">All Artwork</h4>
+    {% endif %}
     <section class="photos">
+    {% block search %}
+    {% endblock %}
+
     {% for artwork in artworks %}
         <a href="{% url 'gallery:artwork_details' pk=artwork.pk %}">
         <img src="{{ artwork.artwork_picture.url }}"/>
