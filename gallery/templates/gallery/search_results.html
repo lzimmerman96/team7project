@@ -42,79 +42,79 @@
             .Card-title,
             .Card-description { margin: 0; }
 
+            .homebutton {
+                align-self: center;
+                background: transparent;
+                padding: 1rem 1rem;
+                margin: 1rem;
+                transition: all .5s ease;
+                color: white;
+                font-size: 2rem;
+                letter-spacing: 1px;
+                outline: none;
+                box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, .2);
+                border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+                border:solid 2px white;
+            }
 
-                .homebutton {
-        align-self: center;
-        background: transparent;
-        padding: 1rem 1rem;
-        margin: 1rem;
-        transition: all .5s ease;
-        color: white;
-        font-size: 2rem;
-        letter-spacing: 1px;
-        outline: none;
-        box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, .2);
-        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-        border:solid 2px white;
-    }
-    .homebutton:hover{
-        box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
-        color: black;
-        background-color: #f7b801;
-        border:solid 5px black;
-    }
+            .homebutton:hover{
+                box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+                color: black;
+                background-color: #f7b801;
+                border:solid 5px black;
+            }
 
-    a, a:hover, a:visited, a:active {
-      text-decoration: none;
-    }
+            a, a:hover, a:visited, a:active {
+              text-decoration: none;
+            }
 
-    .photos {
-      /* Prevent vertical gaps */
-      line-height: 0;
-      -webkit-column-count: 5;
-      -webkit-column-gap:   0px;
-      -moz-column-count:    5;
-      -moz-column-gap:      0px;
-      column-count:         5;
-      column-gap:           0px;
-    }
+            .photos {
+              /* Prevent vertical gaps */
+              line-height: 0;
+              -webkit-column-count: 5;
+              -webkit-column-gap:   0px;
+              -moz-column-count:    5;
+              -moz-column-gap:      0px;
+              column-count:         5;
+              column-gap:           0px;
+            }
 
-    .photos img {
-      /* Just in case there are inline attributes */
-      width: 100% !important;
-      height: auto !important;
-      border: 5px solid black;
+            .photos img {
+              /* Just in case there are inline attributes */
+              width: 100% !important;
+              height: auto !important;
+              border: 5px solid black;
 
-    }
+            }
 
-    @media (max-width: 1200px) {
-        .photos {
-        -moz-column-count:    4;
-        -webkit-column-count: 4;
-        column-count:         4;
-        }
-    }
-    @media (max-width: 1000px) {
-      .photos {
-      -moz-column-count:    3;
-      -webkit-column-count: 3;
-      column-count:         3;
-      }
-    }
-    @media (max-width: 800px) {
-      .photos {
-      -moz-column-count:    2;
-      -webkit-column-count: 2;
-      column-count:         2;
-      }
-    }
-    @media (max-width: 400px) {
-      .photos {
-      -moz-column-count:    1;
-      -webkit-column-count: 1;
-      column-count:         1;
-      }
-    }
+            @media (max-width: 1200px) {
+                .photos {
+                -moz-column-count:    4;
+                -webkit-column-count: 4;
+                column-count:         4;
+                }
+            }
+            @media (max-width: 1000px) {
+              .photos {
+              -moz-column-count:    3;
+              -webkit-column-count: 3;
+              column-count:         3;
+              }
+            }
+            @media (max-width: 800px) {
+              .photos {
+              -moz-column-count:    2;
+              -webkit-column-count: 2;
+              column-count:         2;
+              }
+            }
+            @media (max-width: 400px) {
+              .photos {
+              -moz-column-count:    1;
+              -webkit-column-count: 1;
+              column-count:         1;
+              }
+            }
         </style>
     </head>
 
@@ -139,7 +139,7 @@
 <!--DIV-->
 <div style = "background-color: #f7b801; height: 15em; box-shadow:inset 0 0 2em rgba(0, 0, 0, 0.6); z-index: 1;  margin-top: -100px;">
     <div style="margin-left: 190px; left: 25px;position: absolute;">
-        <h2 style = "color: black; z-index: 1; position: relative">Search Results for "{{ query }}":</h2>
+        <h2 style = "color: black; z-index: 1; position: relative">{{ object_list.distinct.count }} results found for "{{ query }}":</h2>
     </div>
 <div class="sea"></div>
 </div>
