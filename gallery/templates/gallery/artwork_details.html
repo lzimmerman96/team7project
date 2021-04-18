@@ -2,6 +2,7 @@
 {% extends 'gallery/base.html' %}
 just after the  <html lang="en">
 {% load static %}
+
 {% block content %}
     <head>
     <meta charset="utf-8">
@@ -139,14 +140,14 @@ just after the  <html lang="en">
                         <div class="rating rating2">
                             <a href="{% url 'gallery:rating_new' pk=artwork.pk level=5%}" title="Give 5 stars" data-value="5">★</a>
                             <a href="{% url 'gallery:rating_new' pk=artwork.pk level=4%}" title="Give 4 stars" data-value="4">★</a>
-                            <a href="{% url 'gallery:rating_new' pk=artwork.pk level=3%}" data-value="3">★</a>
+                            <a href="{% url 'gallery:rating_new' pk=artwork.pk level=3%}" title="Give 3 stars" data-value="3">★</a>
                             <a href="{% url 'gallery:rating_new' pk=artwork.pk level=2%}" title="Give 2 stars" data-value="2">★</a>
                             <a href="{% url 'gallery:rating_new' pk=artwork.pk level=1%}" title="Give 1 star" data-value="1">★</a>
                         </div>
                         {% endif %}
                     {% endif %}
                     <!---END-OF-RATING--->
-
+                        <h5>Average Rating: {{ avgrate }}</h5>
                         <p style="font-weight: bold; font-size: xx-large">{{ artwork.artwork_title }}</p>
                         <a style="color: #f7b801" href="{% url 'gallery:artist_view' pk=artwork.artwork_artist.pk %}"><p style="font-size: large">Artist: {{ artwork.artwork_artist }}</p></a>
                         <p>{{ artwork.artwork_description }}</p>
