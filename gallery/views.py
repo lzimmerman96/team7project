@@ -187,20 +187,19 @@ def artwork_edit(request, pk):
 
 def artwork_details(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
-
+    # Book.objects.all().aggregate(Avg('price'))
+    # {'price__avg': 34.35}
+    avg = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get('rating_level__avg', 0)
     try:
         favorite = Favorite.objects.get(favorite_artist=request.user.artist, favorite_artwork=artwork)
-        # Book.objects.all().aggregate(Avg('price'))
-        # {'price__avg': 34.35}
-        avg = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get('rating_level__avg', 0)
 
         return render(request, 'gallery/artwork_details.html',
                       {'artwork': artwork, 'status': 'button heart red', 'avgrate': avg})
     except Favorite.DoesNotExist:
-        avg = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get('rating_level__avg', 0)
+
         return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'status': '', 'avgrate': avg})
     except:
-        return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
+        return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'avgrate': avg})
 
 
 def artwork_delete(request, pk):
