@@ -272,16 +272,14 @@ def collection_delete(request, pk):
 
 def favorite_new(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
-    # favorite_instance = Favorite.objects.create(favorite_artist = request.user.artist, favorite_artwork = artwork)
+
     try:
         favorite_instance = Favorite.objects.get(favorite_artist=request.user.artist, favorite_artwork=artwork)
         favorite_instance.delete()
     except Favorite.DoesNotExist:
         favorite_instance = Favorite.objects.create(favorite_artist=request.user.artist, favorite_artwork=artwork)
         favorite_instance.save()
-    # favorite_instance.favorite_artwork = artwork
 
-    # return render(request, 'gallery/artwork_details.html', {'artwork': artwork})
     return redirect('gallery:home')
 
 
@@ -304,3 +302,20 @@ def favorite_list(request):
     favorite = Favorite.objects.all()
     return render(request, 'gallery/favorite_list.html',
                   {'favorites': favorite})
+
+
+def rating_new(request, pk, level):
+    artwork = get_object_or_404(Artwork, pk=pk)
+
+    try:
+        rating_instance = Rating.objects.get(rating_artist=request.user.artist, rating_artwork=artwork)
+        rating_instance.delete()
+        rating_new_instance = Rating.objects.create(rating_artist=request.user.artist, rating_artwork=artwork,
+                                                    rating_level=level)
+        rating_new_instance.save()
+    except Rating.DoesNotExist:
+        rating_instance = Rating.objects.create(rating_artist=request.user.artist, rating_artwork=artwork,
+                                                rating_level=level)
+        rating_instance.save()
+
+    return redirect('gallery:home')
