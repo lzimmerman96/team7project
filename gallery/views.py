@@ -189,7 +189,8 @@ def artwork_details(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
     # Book.objects.all().aggregate(Avg('price'))
     # {'price__avg': 34.35}
-    avg = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get('rating_level__avg', 0)
+    avgfull = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get('rating_level__avg', 0.0)
+    avg = round(avgfull, 2)
     try:
         favorite = Favorite.objects.get(favorite_artist=request.user.artist, favorite_artwork=artwork)
 
