@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.db.models import Q
 from django.db.models import Avg
+
 now = timezone.now()
 
 
@@ -161,6 +162,7 @@ def artwork_new(request):
             artwork = form.save(commit=False)
             artwork.created_date = timezone.now()
             artwork.save()
+
             return redirect('gallery:artwork_list')
     else:
         form = ArtworkForm()
@@ -326,3 +328,30 @@ def rating_new(request, pk, level):
         rating_instance.save()
 
     return redirect('gallery:home')
+
+
+def tag_list(request):
+    tag = Tag.objects.all()
+    return render(request, 'gallery/tag_list.html',
+                  {'tags': tag})
+
+
+def tag_new(request):
+    if request.method == "POST":
+        form = TagForm(request.POST, request.FILES)
+        if form.is_valid():
+            tag = form.save(commit=False)
+            tag.created_date = timezone.now()
+            tag.save()
+
+            return redirect('gallery:tag_list')
+    else:
+        form = TagForm()
+        # print("Else")
+    return render(request, 'gallery/tag_new.html', {'form': form})
+
+
+def tag_delete(request, pk):
+    tag = get_object_or_404(Tag, pk=pk)
+    tag.delete()
+    return redirect('gallery:tag_list')
