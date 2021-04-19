@@ -192,15 +192,27 @@ def artwork_details(request, pk):
     # Book.objects.all().aggregate(Avg('price'))
     # {'price__avg': 34.35}
     avgfull = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get('rating_level__avg', 0.0)
-    avg = round(avgfull, 2)
+    if avgfull is not None:
+        avg = round(avgfull, 2)
+    else:
+        avg = avgfull
     try:
+        # if favorite exists
         favorite = Favorite.objects.get(favorite_artist=request.user.artist, favorite_artwork=artwork)
-
+        try:
+            rating = Rating.objects.get(rating_artist=request.user.artist, rating_artwork=artwork)
+            rating = rating.rating_level
+        except Rating.DoesNotExist:
+            rating = "not rated yet!"
         return render(request, 'gallery/artwork_details.html',
-                      {'artwork': artwork, 'status': 'button heart red', 'avgrate': avg})
+                      {'artwork': artwork, 'status': 'button heart red', 'avgrate': avg, 'prevrate': rating})
     except Favorite.DoesNotExist:
-
-        return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'status': '', 'avgrate': avg})
+        try:
+            rating = Rating.objects.get(rating_artist=request.user.artist, rating_artwork=artwork)
+            rating = rating.rating_level
+        except Rating.DoesNotExist:
+            rating = "Not rated yet!"
+        return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'status': '', 'avgrate': avg, 'prevrate': rating})
     except:
         return render(request, 'gallery/artwork_details.html', {'artwork': artwork, 'avgrate': avg})
 

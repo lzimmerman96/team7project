@@ -137,6 +137,7 @@ just after the  <html lang="en">
                         {% if request.user.is_superuser %}
                         {% else %}
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                        <h4 style="color: #f7b801">Previous Rating: {{ prevrate }}</h4>
                         <div class="rating rating2">
                             <a href="{% url 'gallery:rating_new' pk=artwork.pk level=5%}" title="Give 5 stars" data-value="5">★</a>
                             <a href="{% url 'gallery:rating_new' pk=artwork.pk level=4%}" title="Give 4 stars" data-value="4">★</a>
