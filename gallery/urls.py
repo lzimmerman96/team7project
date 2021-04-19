@@ -29,6 +29,7 @@ urlpatterns = [
     path('artwork_list', views.artwork_list, name='rating_list'),
     path('tag_list', views.tag_list, name='tag_list'),
     path('tag/create/', views.tag_new, name='tag_new'),
+    path('tag/<int:pk>/edit/', views.tag_edit, name='tag_edit'),
     path('tag/<int:pk>/delete/', views.tag_delete, name='tag_delete'),
     path('create_account', views.create_account, name='create_account'),
     path('account_details', views.account_details, name='account_details'),

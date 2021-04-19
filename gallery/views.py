@@ -306,7 +306,9 @@ def favorite_new(request, pk):
 
 def search_results(request):
     query = request.GET.get('q')
+
     if query:
+
         try:
             object_list = Artwork.objects.filter(
                 Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query) |
@@ -367,3 +369,18 @@ def tag_delete(request, pk):
     tag = get_object_or_404(Tag, pk=pk)
     tag.delete()
     return redirect('gallery:tag_list')
+
+
+def tag_edit(request, pk):
+    tag = get_object_or_404(Tag, pk=pk)
+    if request.method == "POST":
+        # update
+        form = TagForm(request.POST, request.FILES, instance=tag)
+        if form.is_valid():
+            tag = form.save(commit=False)
+            tag.save()
+            return redirect('gallery:tag_list')
+    else:
+        # edit
+        form = TagForm(instance=tag)
+    return render(request, 'gallery/tag_edit.html', {'form': form})

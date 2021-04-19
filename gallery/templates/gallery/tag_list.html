@@ -87,6 +87,8 @@
                         {{ tag.tag_description }}
                     <hr style="border: 2px solid black; border-radius: 3px; opacity: .5; margin: 3px; margin-left: 0; position: relative"></p>
                     {% if user.is_authenticated %}
+                        <a href="{% url 'gallery:tag_edit' pk=tag.pk %}" class="btn btn-warning" style="width: 10em">Edit</a>
+                        <br style="margin: 1px; position: relative">
                         <a href="{% url 'gallery:tag_delete' pk=tag.pk %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" style="width: 10em">Delete</a>
                     {% endif %}
                 </div>
