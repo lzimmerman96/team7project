@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 from .models import Artist, Artwork, Collection, Tag, Rating, Favorite
 
-
 # Register your models here.
 
 # This is so the changes made to the default User show up
@@ -58,3 +57,8 @@ admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Tag)
 admin.site.register(Rating, RatingAdmin)
 admin.site.register(Favorite)
+
+# Extending Django admin to include tables for metrics (i.e. admin dashboards)
+# @admin.register(ArtSummary)
+# class ArtSummaryAdmin(ModelAdmin):
+  #  change_list_template = 'admin/art_summary_change_list.html'

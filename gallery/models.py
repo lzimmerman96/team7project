@@ -101,3 +101,12 @@ class Rating(models.Model):
 
     def __str__(self):
         return f'{self.rating_artwork.artwork_title, self.rating_level, self.rating_artist.user}'
+
+# Adding dashboard to DjanoAdmin
+# https://hakibenita.com/how-to-turn-django-admin-into-a-lightweight-dashboard
+#
+#lass ArtSummary(Artwork)
+ #  class Meta:
+  #     proxy = True
+   #    verbose_name = 'Artwork Summary'
+    #   verbose_name_plural = 'Artwork Summary'
