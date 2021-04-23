@@ -56,6 +56,7 @@ class Artwork(models.Model):
     # One piece of Artwork can have multiple Tags
     artwork_tag = models.ManyToManyField(Tag, blank=True)
     artwork_picture = models.ImageField(upload_to='images/', null=True, blank=True) # comment out null and blank later
+    artwork_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.artwork_title}'
@@ -101,3 +102,9 @@ class Rating(models.Model):
 
     def __str__(self):
         return f'{self.rating_artwork.artwork_title, self.rating_level, self.rating_artist.user}'
+
+class SaleSummary(Artwork):
+    class Meta:
+        proxy = True
+        verbose_name = 'Sale Summary'
+        verbose_name_plural = 'Sales Summary'

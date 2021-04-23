@@ -39,7 +39,7 @@ urlpatterns = [
     path('favorite/<int:pk>', views.favorite_new, name='favorite_new'),
     path('rating/<int:pk>/<int:level>', views.rating_new, name='rating_new'),
     path('search/', views.search_results, name='search_results'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
     path('account/', include('django.contrib.auth.urls')),

@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #'admin_tools_stats',
+    #'django_nvd3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gallery.apps.GalleryConfig',
+    #'djangobower',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +138,15 @@ EMAIL_USE_TLS = True
 
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+
+#specific path for compents root
+#BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
+
+#BOWER_INSTALLED_APPS = (
+#    'd3#3.3.13',
+#    'nvd3#1.7.1',
+#)
+#
+#STATICFILES_FINDERS = (
+#    'djangobower.finders.BowerFinder',
+#)
