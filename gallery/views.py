@@ -7,10 +7,13 @@ from .forms import *
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import login, authenticate
-from django.shortcuts import redirect
-from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
 from django.db.models import Avg
+from django.template import Template, Context
+from django.template.loader import get_template
 
 now = timezone.now()
 
@@ -384,3 +387,25 @@ def tag_edit(request, pk):
         # edit
         form = TagForm(instance=tag)
     return render(request, 'gallery/tag_edit.html', {'form': form})
+
+def contact_us(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # first_name = form.cleaned_data['first_name']
+            # last_name = form.cleaned_data['last_name']
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['groupsevenweb@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('gallery:success_message')
+    return render(request, 'gallery/contact_us.html', {'form': form})
+
+
+def success_message(request):
+    return render(request,'gallery/success_message.html')

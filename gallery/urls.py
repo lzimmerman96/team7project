@@ -3,6 +3,7 @@ from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from .views import contact_us, success_message
 
 app_name = 'gallery'
 
@@ -39,6 +40,8 @@ urlpatterns = [
     path('favorite/<int:pk>', views.favorite_new, name='favorite_new'),
     path('rating/<int:pk>/<int:level>', views.rating_new, name='rating_new'),
     path('search/', views.search_results, name='search_results'),
+    path('contact/', contact_us, name='contact_us'),
+    path('success/', success_message, name='success_message'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
