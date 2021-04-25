@@ -388,19 +388,19 @@ def tag_edit(request, pk):
         form = TagForm(instance=tag)
     return render(request, 'gallery/tag_edit.html', {'form': form})
 
+
 def contact_us(request):
     if request.method == 'GET':
         form = ContactForm()
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
-            # first_name = form.cleaned_data['first_name']
-            # last_name = form.cleaned_data['last_name']
             subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
+            user = request.user
+            message = "Sent by: "+ user.email + "\nFirst name: " + user.first_name + "\nLast name: " + user.last_name + "\nMessage: " + message
             try:
-                send_mail(subject, message, from_email, ['groupsevenweb@gmail.com'])
+                send_mail(subject, message, user, ['groupsevenweb@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('gallery:success_message')
