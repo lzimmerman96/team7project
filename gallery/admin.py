@@ -1,10 +1,14 @@
+import json
+
 from django.contrib import admin
+from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.admin import ModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from django.db.models import Count
+from django.db.models import Count, Min, Max, DateTimeField
+from django.db.models.functions import TruncDay
 
-from .models import Artist, Artwork, Collection, Tag, Rating, Favorite, SaleSummary
+from .models import Artist, Artwork, Collection, Tag, Rating, Favorite, ArtworkSummary
 
 
 # Register your models here.
@@ -61,29 +65,46 @@ admin.site.register(Tag)
 admin.site.register(Rating, RatingAdmin)
 admin.site.register(Favorite)
 
-@admin.register(SaleSummary)
-class SaleSummaryAdmin(ModelAdmin):
-    change_list_template = 'admin/sale_summary_change_list.html'
-    date_hierarchy = 'artwork_created'
+
+@admin.register(ArtworkSummary)
+class ArtworkSummaryAdmin(admin.ModelAdmin):
+    list_display = ("artwork_title", "artwork_artist", "artwork_created")
+
     def changelist_view(self, request, extra_context=None):
-        response = super().changelist_view(
-            request,
-            extra_context=extra_context,
+        # Aggregate new subscribers per day
+        chart_data = (
+            ArtworkSummary.objects.annotate(date=TruncDay("artwork_created"))
+                .values("date")
+                .annotate(y=Count("artwork_title"))
+                .order_by("-date")
         )
 
-        try:
-            qs = response.context_data['cl'].queryset
-        except (AttributeError, KeyError):
-            return response
+        # Serialize and attach the chart data to the template context
+        as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
+        extra_context = extra_context or {"chart_data": as_json}
 
-        metrics = {
-            'total': Count('artwork_title'),
-        }
+        # Call the superclass changelist_view to render the page
+        return super().changelist_view(request, extra_context=extra_context)
 
-        response.context_data['summary'] = list(
-            qs
-            .values('sale__category__name')
-            .annotate(**metrics)
+    #def get_urls(self):
+        #urls = super().get_urls()
+        #extra_urls = [
+            #path("chart_data/", self.admin_site.admin_view(self.chart_data_endpoint))
+        #]
+        # NOTE! Our custom urls have to go before the default urls, because they
+        # default ones match anything.
+        #return extra_urls + urls
+
+    # JSON endpoint for generating chart data that is used for dynamic loading
+    # via JS.
+    def chart_data_endpoint(self, request):
+        chart_data = self.chart_data()
+        return JsonResponse(list(chart_data), safe=False)
+
+    def chart_data(self):
+        return (
+            ArtworkSummary.objects.annotate(date=TruncDay("artwork_created"))
+                .values("date")
+                .annotate(y=Count("artwork_title"))
+                .order_by("-date")
         )
-
-        return response
