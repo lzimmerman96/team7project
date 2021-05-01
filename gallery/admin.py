@@ -40,14 +40,14 @@ class ArtworkAdmin(admin.ModelAdmin):
 # to the Collection.
 class CollectionAdmin(admin.ModelAdmin):
     model = Collection
-    filter_horizontal = ('artwork',)
+    list_display = ('collection_name', 'collection_artist')
 
 
 # This is for adding to pieces
 # of Artwork.
-# class FavoriteAdmin(admin.ModelAdmin):
-#    model = Favorite
-#   filter_horizontal = ('favorite_artwork',)
+class FavoriteAdmin(admin.ModelAdmin):
+    model = Favorite
+    list_display = ('favorite_artwork', 'favorite_artist')
 
 
 # This for for displaying the Fields for Ratings.
@@ -63,7 +63,7 @@ admin.site.register(Artwork, ArtworkAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Tag)
 admin.site.register(Rating, RatingAdmin)
-admin.site.register(Favorite)
+admin.site.register(Favorite, FavoriteAdmin)
 
 
 @admin.register(ArtworkSummary)
@@ -86,14 +86,14 @@ class ArtworkSummaryAdmin(admin.ModelAdmin):
         # Call the superclass changelist_view to render the page
         return super().changelist_view(request, extra_context=extra_context)
 
-    #def get_urls(self):
-        #urls = super().get_urls()
-        #extra_urls = [
-            #path("chart_data/", self.admin_site.admin_view(self.chart_data_endpoint))
-        #]
-        # NOTE! Our custom urls have to go before the default urls, because they
-        # default ones match anything.
-        #return extra_urls + urls
+    # def get_urls(self):
+    # urls = super().get_urls()
+    # extra_urls = [
+    # path("chart_data/", self.admin_site.admin_view(self.chart_data_endpoint))
+    # ]
+    # NOTE! Our custom urls have to go before the default urls, because they
+    # default ones match anything.
+    # return extra_urls + urls
 
     # JSON endpoint for generating chart data that is used for dynamic loading
     # via JS.
