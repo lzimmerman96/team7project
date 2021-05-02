@@ -307,21 +307,42 @@ def favorite_new(request, pk):
     return redirect('gallery:home')
 
 
-def search_results(request):
+def search_results(request, view_id=0, original_query=None):
     query = request.GET.get('q')
-
-    if query:
-
+    if original_query:
+        try:
+            query = original_query
+            object_list = Artwork.objects.filter(
+                Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query) |
+                Q(artwork_tag__tag_name__icontains=query)
+            )
+            if view_id == 1:
+                object_list = object_list.all().order_by('-rating') # This sorts by user's ratings....
+            if view_id == 2:
+                object_list = object_list.all().order_by('-artwork_created')
+        except Artwork.DoesNotExist:
+            object_list = None
+        return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query})
+    else:
         try:
             object_list = Artwork.objects.filter(
                 Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query) |
                 Q(artwork_tag__tag_name__icontains=query)
             )
+            if view_id == 1:
+                object_list = object_list.all().order_by('-rating') # This sorts by user's ratings....
+            if view_id == 2:
+                object_list = object_list.all().order_by('-artwork_created')
         except Artwork.DoesNotExist:
             object_list = None
         return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query})
-    else:
-        return render(request, 'gallery/home.html')
+
+
+#def search_results_rating_sort(request, object_list):
+#    view = 1
+#    object_list = object_list
+#    sorted_query = object_list.distinct.objects.all().order_by('avgrate')
+#    return render(request, 'gallery/search_results.html', {'rating_sorted_query': sorted_query, 'sort_view': view})
 
 
 def favorite_list(request):
