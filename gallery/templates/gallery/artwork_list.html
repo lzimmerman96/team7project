@@ -80,6 +80,40 @@
                                 </tr>
                             </table>
                         </div>
+
+
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    {% else %}
+                        <div class="col-lg-3 col-md-3 col-xs-6 thumb">
+                            <figure>
+                                <a data-fancybox="images"
+                                   href="media/{{ artwork.artwork_picture }}"
+                                   data-caption="{{ artwork.artwork_title }}">
+                                    <img class="img-fluid pic-size zoom" style= "border-radius: 10px 40px;" src="media/{{ artwork.artwork_picture }}"/>
+                                </a>
+                                <figcaption class="card-body" style="color: white; display: none">
+                                    <h1 class="card-title">{{ artwork.artwork_title }}</h1>
+                                    <h2 class="card-text">{{ artwork.artwork_artist }}</h2>
+                                    <h3 class="card-text">{{ artwork.artwork_description }}</h3>
+                                    <h4>Tags:</h4>
+                                    {% for tag in artwork.artwork_tag.all %}
+                                        <h4>{{ tag }}</h4>
+                                    {% endfor %}
+                                </figcaption>
+                            </figure>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td><h4 style="color: white">{{ artwork.artwork_title }}</h4></td>
+                                    {% if request.user.is_superuser or user.get_username == artwork.artwork_artist|stringformat:"s" %}
+                                        <td><a href="{% url 'gallery:artwork_edit' pk=artwork.pk %}">Edit</a></td>
+                                        <td><a href="{% url 'gallery:artwork_delete' pk=artwork.pk %}"
+                                               onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            </table>
+                        </div>
                     {% endif %}
                 {% endfor %}
             </div>

@@ -171,7 +171,7 @@
             {% if user.is_authenticated %}
                {% else %}
                <a href="{% url 'gallery:artist_list' %}" class="homebutton" role="button" aria-disabled="true">All Artists</a>
-
+                <a href="{% url 'gallery:artwork_list' %}" class="homebutton" role="button" aria-disabled="true">All Artwork</a>
             {% endif %}
         {% endif %}
     </ul>
