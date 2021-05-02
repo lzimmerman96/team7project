@@ -309,6 +309,7 @@ def favorite_new(request, pk):
 
 def search_results(request, view_id=0, original_query=None):
     query = request.GET.get('q')
+    # artwork = Artwork.objects.all()
     if original_query:
         try:
             query = original_query
@@ -317,7 +318,30 @@ def search_results(request, view_id=0, original_query=None):
                 Q(artwork_tag__tag_name__icontains=query)
             )
             if view_id == 1:
-                object_list = object_list.all().order_by('-rating') # This sorts by user's ratings....
+
+                # avgfull = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get(
+                    # 'rating_level__avg', 0.0)
+
+                # object_list = object_list.all().order_by('-rating') # This sorts by user's ratings....
+
+                # get all Artwork objects
+                object_list_temp = object_list.all()
+                # create an empty list
+                object_list = []
+                # create an empty list for comparisons
+
+
+                # for every Artwork object in all of the Artwork objects
+                for art in object_list_temp:
+                    # get the average Rating for that Artwork object
+                    avg = Rating.objects.filter(rating_artwork=art).aggregate(Avg('rating_level')).get('rating_level__avg', 0.0)
+
+                    # check if there is a value
+
+                    # add it to the list in the correct order
+                    object_list.append(art)
+
+
             if view_id == 2:
                 object_list = object_list.all().order_by('-artwork_created')
         except Artwork.DoesNotExist:
@@ -330,6 +354,7 @@ def search_results(request, view_id=0, original_query=None):
                 Q(artwork_tag__tag_name__icontains=query)
             )
             if view_id == 1:
+
                 object_list = object_list.all().order_by('-rating') # This sorts by user's ratings....
             if view_id == 2:
                 object_list = object_list.all().order_by('-artwork_created')
