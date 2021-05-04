@@ -139,7 +139,7 @@
               display: none;
               position: absolute;
               background-color: #f1f1f1;
-              min-width: 160px;
+              min-width: 220px;
               overflow: auto;
               box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
               z-index: 1;
@@ -155,6 +155,10 @@
             .dropdown a:hover {background-color: #ddd;}
 
             .show {display: block;}
+
+            .sorted_by {
+                color: white;
+            }
 
         </style>
 
@@ -267,11 +271,17 @@
             <div class="dropdown">
                 <button onclick="dropdownFunction()" class="dropbtn">Sort by...</button>
                 <div id="sortDropdown" class="dropdown-content">
-                    <a href="{% url 'gallery:search_results' view_id=2 original_query=query %}">Date Submitted</a>
-                    <a href="{% url 'gallery:search_results' view_id=1 original_query=query %}">Rating</a>
+                    <a href="{% url 'gallery:search_results' view_id=0 original_query=query %}">None</a> <!-- This is the default - same as view_id 3 -->
+                    <a href="{% url 'gallery:search_results' view_id=2 original_query=query %}">Date Submitted (newest first)</a>
+                    <a href="{% url 'gallery:search_results' view_id=3 original_query=query %}">Date Submitted (oldest first)</a>
+                    <a href="{% url 'gallery:search_results' view_id=4 original_query=query %}">Artwork Title (A to Z)</a>
+                    <a href="{% url 'gallery:search_results' view_id=5 original_query=query %}">Artwork Title (Z to A)</a>
+                    <!-- <a href="{ url 'gallery:search_results' view_id=1 original_query=query %}">Rating (highest to lowest)</a> NOTE: currently not functional-->
                 </div>
             </div>
-
+            <div class="sorted_by">
+                Currently sorting by: {{ sorted_by }}
+            </div>
         {% for art in object_list.distinct %}
             <div class="Card">
                 <div class="Card-image"><a href="{% url 'gallery:artwork_details' pk=art.pk %}"><img src="{{ art.artwork_picture.url }}" height=300px width=auto></a></div>

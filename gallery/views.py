@@ -317,57 +317,60 @@ def search_results(request, view_id=0, original_query=None):
                 Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query) |
                 Q(artwork_tag__tag_name__icontains=query)
             )
-            if view_id == 1:
-
-                # avgfull = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get(
-                    # 'rating_level__avg', 0.0)
-
-                # object_list = object_list.all().order_by('-rating') # This sorts by user's ratings....
-
-                # get all Artwork objects
-                object_list_temp = object_list.all()
-                # create an empty list
-                object_list = []
-                # create an empty list for comparisons
-
-
-                # for every Artwork object in all of the Artwork objects
-                for art in object_list_temp:
-                    # get the average Rating for that Artwork object
-                    avg = Rating.objects.filter(rating_artwork=art).aggregate(Avg('rating_level')).get('rating_level__avg', 0.0)
-
-                    # check if there is a value
-
-                    # add it to the list in the correct order
-                    object_list.append(art)
-
-
+            sorted_by = "Date Submitted (oldest first)"
+            # NOTE: THE FOLLOWING VIEW_ID IS FOR SORTING BY RATING - currently not functional
+            #if view_id == 1:
+            #
+            #     def getAverage(artwork):
+            #         if Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get('rating_level__avg', 0.0) is None:
+            #             avg = 0
+            #         else:
+            #             avg = Rating.objects.filter(rating_artwork=artwork).aggregate(Avg('rating_level')).get('rating_level__avg', 0.0)
+            #         return avg
+            #
+            #     #object_list = object_list.all().order_by(getAverage(object)) # This sorts by user's ratings....
+            #
+            #     # get all Artwork objects
+            #     object_list_temp = object_list.all()
+            #     # create an empty list
+            #     object_list = []
+            #     # create an empty list for comparisons
+            #
+            #     i = 0
+            #     # for every Artwork object in the temp list
+            #     for art in object_list_temp:                                # NOTE: this will not do a proper sort, just used for testing
+            #         # get the average Rating for that Artwork object
+            #         avg = getAverage(art)
+            #         # check if there is a value
+            #         if avg > getAverage(object_list_temp[i]):
+            #             # add it to the list in the correct order
+            #             object_list.append(art)
+            #         i += 1
             if view_id == 2:
                 object_list = object_list.all().order_by('-artwork_created')
+                sorted_by = "Date Submitted (newest first)"
+            if view_id == 3:
+                object_list = object_list.all().order_by('artwork_created')
+            if view_id == 4:
+                object_list = object_list.all().order_by('artwork_title')
+                sorted_by = "Artwork Title (A to Z)"
+            if view_id == 5:
+                object_list = object_list.all().order_by('-artwork_title')
+                sorted_by = "Artwork Title (Z to A)"
         except Artwork.DoesNotExist:
             object_list = None
-        return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query})
+        return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query, 'sorted_by': sorted_by})
     else:
         try:
             object_list = Artwork.objects.filter(
                 Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query) |
                 Q(artwork_tag__tag_name__icontains=query)
             )
-            if view_id == 1:
-
-                object_list = object_list.all().order_by('-rating') # This sorts by user's ratings....
-            if view_id == 2:
-                object_list = object_list.all().order_by('-artwork_created')
+            sorted_by = "Date Submitted (oldest first)"
         except Artwork.DoesNotExist:
             object_list = None
-        return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query})
+        return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query, 'sorted_by': sorted_by})
 
-
-#def search_results_rating_sort(request, object_list):
-#    view = 1
-#    object_list = object_list
-#    sorted_query = object_list.distinct.objects.all().order_by('avgrate')
-#    return render(request, 'gallery/search_results.html', {'rating_sorted_query': sorted_query, 'sort_view': view})
 
 
 def favorite_list(request):
