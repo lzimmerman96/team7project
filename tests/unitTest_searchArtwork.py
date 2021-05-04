@@ -20,7 +20,8 @@ class ll_ATS(unittest.TestCase):
         driver = self.driver
         driver.maximize_window()
 
-        driver.get("http://127.0.0.1:8000")
+        # driver.get("http://127.0.0.1:8000")
+        driver.get("http://webappgroupseven.pythonanywhere.com/")
         time.sleep(3)
 
         # find the search bar and enter a search
@@ -42,10 +43,6 @@ class ll_ATS(unittest.TestCase):
             elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/h1/a")
             # find the artist for the Artwork
             elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/p[1]/a")
-            # attempt to find at least a label for the description
-            elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/p[4]/strong")
-            # attempt to find at least a label for the tags
-            elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/p[5]/strong")
 
             time.sleep(3)
             try:
@@ -61,7 +58,7 @@ class ll_ATS(unittest.TestCase):
                 self.fail("Artwork details not viewable.")
                 assert False
 
-            time.sleep(3)
+            # time.sleep(3)
             try:
                 # find the 'Home' button and click
                 elem = driver.find_element_by_xpath("/html/body/nav/div/ul/li[1]/a").click()

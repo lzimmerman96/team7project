@@ -20,7 +20,8 @@ class ll_ATS(unittest.TestCase):
 
         driver = self.driver
         driver.maximize_window()
-        driver.get("http://127.0.0.1:8000/admin")
+        # driver.get("http://127.0.0.1:8000/admin")
+        driver.get("http://webappgroupseven.pythonanywhere.com/admin")
         elem = driver.find_element_by_id("id_username")
         elem.send_keys(user)
         elem = driver.find_element_by_id("id_password")
@@ -29,7 +30,8 @@ class ll_ATS(unittest.TestCase):
         elem.send_keys(Keys.RETURN)
 
         # after login, go to the Tags page.
-        driver.get("http://127.0.0.1:8000/admin/gallery/tag/")
+        # driver.get("http://127.0.0.1:8000/admin/gallery/tag/")
+        driver.get("http://webappgroupseven.pythonanywhere.com/admin/gallery/tag")
         time.sleep(3)
         # find the 'ADD TAG' button and click
         elem = driver.find_element_by_xpath("/html/body/div/div[3]/div/div[1]/div/ul/li/a").click()

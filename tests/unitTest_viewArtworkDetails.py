@@ -20,7 +20,8 @@ class ll_ATS(unittest.TestCase):
         driver = self.driver
         driver.maximize_window()
 
-        driver.get("http://127.0.0.1:8000")
+        # driver.get("http://127.0.0.1:8000")
+        driver.get("http://webappgroupseven.pythonanywhere.com/")
         time.sleep(3)
 
         # find a piece of Artwork and click it – note this is all one Python statement
