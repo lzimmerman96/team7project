@@ -35,25 +35,25 @@ class ll_ATS(unittest.TestCase):
             # verify Artwork is present when searched
 
             # attempt to find a piece of Artwork
-            elem = driver.find_element_by_xpath("/html/body/div[5]/div[1]/div[1]/a/img")
+            elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[1]/a/img")
             # attempt to find a message stating '# results found for "oil":'
             elem = driver.find_element_by_xpath("/html/body/div[3]/div[1]/h2")
             # find the title of the Artwork
-            elem = driver.find_element_by_xpath("/html/body/div[5]/div[1]/div[2]/h1/a")
+            elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/h1/a")
             # find the artist for the Artwork
-            elem = driver.find_element_by_xpath("/html/body/div[5]/div[1]/div[2]/p[1]/a")
+            elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/p[1]/a")
             # attempt to find at least a label for the description
-            elem = driver.find_element_by_xpath("/html/body/div[5]/div[1]/div[2]/p[2]/strong")
+            elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/p[4]/strong")
             # attempt to find at least a label for the tags
-            elem = driver.find_element_by_xpath("/html/body/div[5]/div[1]/div[2]/p[3]/strong")
+            elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/p[5]/strong")
 
             time.sleep(3)
             try:
                 # attempt to get to the artwork details page from clicking the title
-                elem = driver.find_element_by_xpath("/html/body/div[5]/div[1]/div[2]/h1/a").click()
+                elem = driver.find_element_by_xpath("/html/body/div[5]/div[3]/div[2]/h1/a").click()
                 time.sleep(3)
                 # attempt to get to the Artist's page from the Artwork Details.
-                elem = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[2]/div/a[1]").click()
+                elem = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[2]/div/a[1]/p").click()
                 time.sleep(3)
                 # find the Artist's name showing that we are on the Artist's details page.
                 elem = driver.find_element_by_xpath("/html/body/div[2]/table/tbody/tr[1]/td/h1")
