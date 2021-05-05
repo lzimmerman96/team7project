@@ -1,7 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Artist, User, Artwork, Collection, Favorite, Rating, Tag
+from django.contrib.admin import widgets
+from datetime import datetime
 
+this_year = datetime.now().year
 
 class ArtistForm(forms.ModelForm):
     class Meta:
@@ -83,3 +86,16 @@ class UpdateArtistForm(forms.ModelForm):
 class ContactForm(forms.Form):
     subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)
+
+
+class DateInput (forms.DateInput):
+    input_type = 'date'
+
+
+class DateFilterForm(forms.Form):
+    start_date = forms.DateField(label="Start Range", required=False, widget=forms.SelectDateWidget(years=range(2015, this_year+1), attrs={'style':'color:black'})) #, widget=widgets.AdminDateWidget)#, forms.TextInput(attrs={'style':'color:black'})})
+    end_date = forms.DateField(label="End Range", required=False, widget=forms.SelectDateWidget(years=range(2015, this_year+1), attrs={'style':'color:black'})) #, widget=widgets.AdminDateWidget)#, forms.TextInput(attrs={'style':'color:black'})})
+    view_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    filter_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    original_query = forms.CharField(max_length=500, widget=forms.HiddenInput, required=False)
+    fields = '__all__'
