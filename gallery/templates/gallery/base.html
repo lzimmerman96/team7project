@@ -71,7 +71,9 @@
       }
     }
 
-
+    .dropdown-item:hover {
+        background-color: #28225d;
+    }
 
 </style>
 
@@ -100,7 +102,7 @@
           Account
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #3d348b; z-index: 2;">
-          <a class="dropdown-item" href="{% url 'gallery:account_details' %}" style = "color: white">Account Details</a>
+          <a class="dropdown-item" href="{% url 'gallery:account_details' %}" style = "color: white" >Account Details</a>
           <a class="dropdown-item" href="{% url 'password_change' %}" style = "color: white">Change Password</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'logout' %}" style = "color: white">Logout</a>
