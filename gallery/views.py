@@ -306,7 +306,6 @@ def favorite_new(request, pk):
 
     return redirect('gallery:home')
 
-
 def search_results(request, view_id=3, filter_id=None, start_date=None, end_date=None, original_query=None):
     query = request.GET.get('q')
     # artwork = Artwork.objects.all()
@@ -349,20 +348,19 @@ def search_results(request, view_id=3, filter_id=None, start_date=None, end_date
             object_list = None
         return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query,
                                                                'sorted_by': sorted_by, 'view_id': view_id, 'form': form,
-                                                               'start_filter': start_date, 'end_filter': end_date, 'filter_id': filter_id})
+                                                               'start_filter': start_date, 'end_filter': end_date})
     else:
         try:
             object_list = Artwork.objects.filter(
                 Q(artwork_title__icontains=query) | Q(artwork_description__icontains=query) |
                 Q(artwork_tag__tag_name__icontains=query)
             )
-            object_list = object_list.all().order_by('artwork_created')
             sorted_by = "Date Submitted (oldest first)"
         except Artwork.DoesNotExist:
             object_list = None
         return render(request, 'gallery/search_results.html', {'object_list': object_list, 'query': query,
                                                                'sorted_by': sorted_by, 'view_id': view_id, 'form': form,
-                                                               'start_filter': start_date, 'end_filter': end_date, 'filter_id': filter_id})
+                                                               'start_filter': start_date, 'end_filter': end_date})
 
 
 def favorite_list(request):

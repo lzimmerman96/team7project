@@ -213,11 +213,6 @@
             input {
                 color: black;
             }
-            .no_filter_results {
-                color:white;
-                position: relative;
-                overflow: visible;
-            }
 
         </style>
         <script>
@@ -344,11 +339,15 @@
             </div>
             <div class="datefilter">
                 <h3 style="display: inline-block; padding-right: 20px;">Filter Results by Date:</h3>
+                <!-- <form method="POST" class="date-form" action="{ url 'gallery:search_results' view_id=view_id filter_id=1 original_query=query %}"> -->
                 <form method="POST" class="date-filter-form" action="{% url 'gallery:search_results' view_id=view_id filter_id=1 original_query=query%}">
+                    <!-- <p>Start Range: <input type="text" style="color:black;" id="datepicker" name="datepicker"> End Range: <input type="text" style="color:black;" id="datepicker2" name="datepicker2"></p> -->
                     {% csrf_token %}
                     {{ form.as_p}}
                     <input type="submit" value="Submit" class="submitDates">
+                    <!--<button type="submit" class="submitDates">Submit</button> -->
                 </form>
+                <!-- <a class="submitDates" href="{ url 'gallery:search_results' view_id=6 original_query=query start_date=datepicker end_date=datepicker2 %}">Submit</a> -->
             </div>
             <div style="display: inline-block; margin-left: -75%; color: white">
                 <p>Current filters applied:<br/>
@@ -357,6 +356,8 @@
                 <a class="clearFilters" href="{% url 'gallery:search_results' view_id=view_id original_query=query %}">Clear Filters</a>
             </div>
         </div>
+
+
 
         {% for art in object_list.distinct %}
             <div class="Card">
@@ -374,42 +375,9 @@
                     </div>
             </div>
         {% endfor %}
-    {% elif filter_id == 1 %}
-        <div style="height: 500px">
-        <div class="filter_and_sort">
-            <div class="dropdown">
-                <button onclick="dropdownFunction()" class="dropbtn">Sort by...</button>
-                <div id="sortDropdown" class="dropdown-content">
-                    <a href="{% url 'gallery:search_results' view_id=2 original_query=query %}">Date Submitted (newest first)</a>
-                    <a href="{% url 'gallery:search_results' view_id=3 original_query=query %}">Date Submitted (oldest first)</a>
-                    <a href="{% url 'gallery:search_results' view_id=4 original_query=query %}">Artwork Title (A to Z)</a>
-                    <a href="{% url 'gallery:search_results' view_id=5 original_query=query %}">Artwork Title (Z to A)</a>
-                    <!-- <a href="{ url 'gallery:search_results' view_id=1 original_query=query %}">Rating (highest to lowest)</a> NOTE: currently not functional-->
-                </div>
-                <div class="sorted_by">
-                    Currently sorting by: {{ sorted_by }}
-                </div>
-            </div>
-            <div class="datefilter">
-                <h3 style="display: inline-block; padding-right: 20px;">Filter Results by Date:</h3>
-                <form method="POST" class="date-filter-form" action="{% url 'gallery:search_results' view_id=view_id filter_id=1 original_query=query%}">
-                    {% csrf_token %}
-                    {{ form.as_p}}
-                    <input type="submit" value="Submit" class="submitDates">
-                </form>
-            </div>
-            <div style="display: inline-block; margin-left: -75%; color: white">
-                <p>Current filters applied:<br/>
-                Start Range: {{ start_filter }}<br/>
-                End Range: {{ end_filter }}</p>
-                <a class="clearFilters" href="{% url 'gallery:search_results' view_id=view_id original_query=query %}">Clear Filters</a>
-            </div>
-        </div>
-        <div class="no_filter_results"><h2>No results found for the currently applied filter. Please try again.</h2></div>
-        </div>
     {% else %}
         <div style="position: fixed; color: white; margin-left: 10px; z-index: 10">
-            <h4>No results found for "{{ query }}", please try again.</h4>
+         <h4>No results found for "{{ query }}", please try again.</h4>
         </div>
     {% endif %}
 
