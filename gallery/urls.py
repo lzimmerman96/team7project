@@ -42,6 +42,7 @@ urlpatterns = [
     path('search/', views.search_results, name='search_results'),
     path('search/<int:view_id>/', views.search_results, name='search_results'),
     path('search/<int:view_id>/<original_query>/', views.search_results, name='search_results'),
+    path('search/<int:view_id>/<int:filter_id>/<original_query>/', views.search_results, name='search_results'),
     path('contact/', contact_us, name='contact_us'),
     path('success/', success_message, name='success_message'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
